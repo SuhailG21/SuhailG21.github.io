@@ -45,6 +45,42 @@ body {font-family: Arial;}
 </head>
 <body>
 
+  <head>
+
+    <style>
+        .popup {
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: none;
+        }
+        .popup-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888888;
+            width: 30%;
+            font-weight: bolder;
+        }
+        .popup-content button {
+            display: block;
+            margin: 0 auto;
+        }
+        .show {
+            display: block;
+        }
+       
+    </style>
+</head>
+ 
+
+
+
   <body text="#ffffff">
     <head>
         <style>
@@ -127,18 +163,41 @@ body {font-family: Arial;}
     <form action="/MyWebsite.html">
       <input type="file" id="myFile" name="filename">
       
-      <button onclick="btnUpload()">Upload Documents</button>
-
-      <script>
-      function btnUpload() {
-        alert("Documents uploaded successfully");
-      }
-      </script>
-
+    
     </form>
     
-    </body>
-  
+
+      
+      <button id="myButton">
+            Upload Documents
+        </button>
+      <div id="myPopup" class="popup">
+          <div class="popup-content">
+              
+              <p style="color:black;">Documents uploaded successfully!</p>
+              <button id="closePopup">
+                    Close
+                </button>
+          </div>
+      </div>
+   
+      <script>
+          myButton.addEventListener("click", function () {
+              myPopup.classList.add("show");
+          });
+          closePopup.addEventListener("click", function () {
+              myPopup.classList.remove("show");
+          });
+          window.addEventListener("click", function (event) {
+              if (event.target == myPopup) {
+                  myPopup.classList.remove("show");
+              }
+          });
+      </script>
+     
+  </body>
+
+
 
   <p><button onclick="btnQR()">Generate QR Code</button></p>
   <p id="demo"></p>
