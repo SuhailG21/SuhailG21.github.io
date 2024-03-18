@@ -10,7 +10,7 @@ body {font-family: Arial;}
 .tab {
   overflow: hidden;
   border: 1px solid #ccc;
-  background-color: #f1f1f1;
+  background-color: #fff;
 }
 
 /* Style the buttons inside the tab */
@@ -21,13 +21,13 @@ body {font-family: Arial;}
   outline: none;
   cursor: pointer;
   padding: 14px 16px;
-  transition: 0.3s;
+  transition: 0.5s;
   font-size: 17px;
 }
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #ddd;
+  background-color: #aaa;
 }
 
 /* Create an active/current tablink class */
@@ -96,10 +96,121 @@ body {font-family: Arial;}
     </head>
 
 
+    <head>
+      
+      <style>
+    
+      
+      /* Full-width input fields */
+      input[type=text], input[type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+      }
+      
+      
+      button:hover {
+        opacity: 0.8;
+      }
+      
+      
+      
+      /* Center the image and position the close button */
+      .imgcontainer {
+        text-align: center;
+        margin: 24px 0 12px 0;
+        position: relative;
+      }
+      
+      img.avatar {
+        width: 40%;
+        border-radius: 50%;
+      }
+      
+      .container {
+        padding: 16px;
+      }
+      
+      span.psw {
+        float: right;
+        padding-top: 16px;
+      }
+      
+      /* The Modal (background) */
+      .modal {
+        display: none; /* Hidden by default */
+      
+      }
+      
+      /* Modal Content/Box */
+      .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+      }
+      
+      /* The Close Button (x) */
+      .close {
+        position: absolute;
+        right: 25px;
+        top: 0;
+        color: #000;
+        font-size: 35px;
+        font-weight: bold;
+      }
+      
+      .close:hover,
+      .close:focus {
+        color: red;
+        cursor: pointer;
+      }
+      
+      /* Add Zoom Animation */
+      .animate {
+        -webkit-animation: animatezoom 0.6s;
+        animation: animatezoom 0.6s
+      }
+      
+      @-webkit-keyframes animatezoom {
+        from {-webkit-transform: scale(0)} 
+        to {-webkit-transform: scale(1)}
+      }
+        
+      @keyframes animatezoom {
+        from {transform: scale(0)} 
+        to {transform: scale(1)}
+      }
+      
+      /* Change styles for span and cancel button on extra small screens */
+      @media screen and (max-width: 300px) {
+        span.psw {
+           display: block;
+           float: none;
+        }
+        .cancelbtn {
+           width: 100%;
+        }
+      }
+      </style>
+      </head>
+
+
+
+
+
 <div class="tab">
   <button class="tablinks" onclick="openCity(event, 'London')">Autobiography</button>
   <button class="tablinks" onclick="openCity(event, 'Paris')">Work</button>
   <button class="tablinks" onclick="openCity(event, 'Tokyo')">Upload documents</button>
+  <button class="tablinks" onclick="openCity(event, 'Vault')">Vault</button>
+  <button class="tablinks" onclick="openCity(event, 'Test1')">Test1</button>
+  <button class="tablinks" onclick="openCity(event, 'Test2')">Test2</button>
+  <button class="tablinks" onclick="openCity(event, 'Test3')">Test3</button>
+  <button class="tablinks" onclick="openCity(event, 'Test4')">Test4</button>
 </div>
 
 <div id="London" class="tabcontent">
@@ -126,7 +237,7 @@ body {font-family: Arial;}
  
   <div class="project" id="project1" ><u>NSFAS Project</u> 
     <p>
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG8z2PIGl6tJyLIe8AX0pP_YE5gRoQxjyHhVz_NRVh1A&s" alt="" width="200" height="200">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG8z2PIGl6tJyLIe8AX0pP_YE5gRoQxjyHhVz_NRVh1A&s" alt="" width= "200" height="200">
     </p>
     <p>(NSFAS, the National Student Financial Aid Scheme is yet another South African government financial support scheme for assisting potential learners in achieving their academic goals. NSFAS was established in 1991 with
         this vision and has been there playing an indisputable role by carrying out its financial support programs ever since. The organization has been empowering South Africa socially and economically by improving its funding schemes with new initiatives each year.
@@ -135,12 +246,12 @@ body {font-family: Arial;}
 
 <div class="project" id="project2" ><u>CRYPTO Wallet</u> 
     <p>
-        <img src="https://images.idgesg.net/images/article/2019/04/crypto-currency_hand-holding-phone-iwth-bitcoin_digital-wallet_bitcoin_blockchain-100793898-large.jpg?auto=webp&quality=85,70" alt="" width="200" height="200">
+        <img src="https://images.idgesg.net/images/article/2019/04/crypto-currency_hand-holding-phone-iwth-bitcoin_digital-wallet_bitcoin_blockchain-100793898-large.jpg?auto=webp&quality=85,70" alt="" width= "200" height="200">
     </p>
     <p>(Crypto wallets keep your private keys – the passwords that give you access to your cryptocurrencies – safe and accessible, allowing you to send and receive cryptocurrencies like Bitcoin and Ethereum. They come in many forms, from hardware wallets like Ledger (which looks like a USB stick) to mobile apps like Coinbase Wallet, which makes using crypto as easy as shopping with a credit card online.)</p></div>
 <div class="project" id="project3" ><u>IBM Cognos</u>
     <p>
-        <img src="https://www.ibm.com/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/s-migr/ul/g/8a/f0/cognos-analytics-with-watson-leadspace-2.component.xl.ts=1709839324792.png/content/adobe-cms/us/en/products/cognos-analytics/_jcr_content/root/leadspace_container/leadspace" alt="" width="200" height="200">
+        <img src="https://www.ibm.com/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/s-migr/ul/g/8a/f0/cognos-analytics-with-watson-leadspace-2.component.xl.ts=1709839324792.png/content/adobe-cms/us/en/products/cognos-analytics/_jcr_content/root/leadspace_container/leadspace" alt="" width= "200" height="200">
     </p>
 
     <p>(IBM Cognos Analytics is an intuitive, easy-to-use tool that integrates reports, analytics, dashboards, and history so businesses of any size can better understand their data and make more effective, confident decisions through automated data visualisation.
@@ -149,6 +260,66 @@ body {font-family: Arial;}
     IBM Cognos Analytics connects to a wide variety of data sources including direct connections and flat files and is available on IBM’s Cloud, hosted in your own Cloud, or on premise.)</p></div>
 </section>
 <footer>
+
+</div>
+
+<div id="Vault" class="tabcontent">
+  
+  <body>
+
+    <h2>Please Log in to access Vault</h2>
+    
+    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+    
+    <div id="id01" class="modal">
+      
+      <form class="modal-content animate" action="/Vault.html" method="post">
+        <div class="imgcontainer">
+
+
+
+          <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+          <img src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=" alt="" class="avatar">
+        </div>
+    
+        <div class="container">
+          <label for="uname"><b>Username</b></label>
+          <input type="text" placeholder="Enter Username" name="uname" required>
+    
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" required>
+            
+          <button type="submit">Login</button>
+          <label>
+            <input type="checkbox" checked="checked" name="remember"> <label style="color: black;">Remember me</label>
+          </label>
+        </div>
+    
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+          <span class="psw" style="color:black;">Forgot <a href="#">password?</a></span>
+        </div>
+      </form>
+    </div>
+    
+    <script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    </script>
+    
+  
+
+    </body>
+  
+
+
 
 
 
