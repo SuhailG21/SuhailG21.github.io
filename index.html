@@ -1,7 +1,51 @@
-<DOCTYPE html>
-    <html>
-        <center>
-    <body text="#ffffff">
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial;}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+</style>
+</head>
+<body>
+
+  <body text="#ffffff">
     <head>
         <style>
         
@@ -13,80 +57,118 @@
             
             </style>
     </head>
-    
 
-<head>
-    <title>S.Govender - Portfolio</title>
+
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')">Autobiography</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">Work</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">QR Code</button>
+</div>
+
+<div id="London" class="tabcontent">
+  <h3>Autobiography of Suhail Govender</h3>
   
-</head>
-<body>
-   
-    <header>
-     
-        <h1>Suhail Govender</h1>
-        <p>Web Developer | Designer | Tech Enthusiast</p>
-    </header>
-    <section id="bio">
-        <p> <img src="https://media.licdn.com/dms/image/D4D12AQFrJR5LM1m0dQ/article-cover_image-shrink_720_1280/0/1681371524062?e=2147483647&v=beta&t=UNWiKVD3cqqbT6Y2vH5lvFI6jjUFKQxr0s6kO9Lr8h4" alt="" width="200" height="200"> 
-            <img src="https://www.wealthmanagement.com/sites/wealthmanagement.com/files/styles/article_featured_retina/public/how-to-keep-wealthy-clients-promo.jpg?itok=8gSqk9Nc" alt="" width="200" height="200">
-        </p>
+  <p>Web Developer | Designer | Tech Enthusiast</p>
+</header>
+<section id="bio">
+    <p> <img src="https://media.licdn.com/dms/image/D4D12AQFrJR5LM1m0dQ/article-cover_image-shrink_720_1280/0/1681371524062?e=2147483647&v=beta&t=UNWiKVD3cqqbT6Y2vH5lvFI6jjUFKQxr0s6kO9Lr8h4" alt="" width="200" height="200"> 
+        <img src="https://www.wealthmanagement.com/sites/wealthmanagement.com/files/styles/article_featured_retina/public/how-to-keep-wealthy-clients-promo.jpg?itok=8gSqk9Nc" alt="" width="200" height="200">
+    </p>
 
-    </section>
-    <section id="work">
-        <h2><u> My Work</u></h2>
 
+    <p >Contact me at :</p>
+    <p>[suhail@tenetech.co.za]</p>
+    <p >[0817360195]</p>
+
+
+
+</div>
+
+<div id="Paris" class="tabcontent">
+  <h3>Work done by Suhail Govender</h3>
+ 
+  <div class="project" id="project1" ><u>NSFAS Project</u> 
+    <p>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG8z2PIGl6tJyLIe8AX0pP_YE5gRoQxjyHhVz_NRVh1A&s" alt="" width="900" height="400">
+    </p>
+    <p>(NSFAS, the National Student Financial Aid Scheme is yet another South African government financial support scheme for assisting potential learners in achieving their academic goals. NSFAS was established in 1991 with
+        this vision and has been there playing an indisputable role by carrying out its financial support programs ever since. The organization has been empowering South Africa socially and economically by improving its funding schemes with new initiatives each year.
+        NSFAS primarily aims at facilitating South African learners who demonstrate a financial need or physical disability and wish to pursue undergraduate and postgraduate studies at a South African public university or Technical and Vocational Education and Training
+        (TVET) college., It truly supports the vision that every learner should have equal access to tertiary education despite their adverse financial or physical conditions.)</p></div>
+
+<div class="project" id="project2" ><u>CRYPTO Wallet</u> 
+    <p>
+        <img src="https://images.idgesg.net/images/article/2019/04/crypto-currency_hand-holding-phone-iwth-bitcoin_digital-wallet_bitcoin_blockchain-100793898-large.jpg?auto=webp&quality=85,70" alt="" width="900" height="400">
+    </p>
+    <p>(Crypto wallets keep your private keys – the passwords that give you access to your cryptocurrencies – safe and accessible, allowing you to send and receive cryptocurrencies like Bitcoin and Ethereum. They come in many forms, from hardware wallets like Ledger (which looks like a USB stick) to mobile apps like Coinbase Wallet, which makes using crypto as easy as shopping with a credit card online.)</p></div>
+<div class="project" id="project3" ><u>IBM Cognos</u>
+    <p>
+        <img src="https://www.ibm.com/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/s-migr/ul/g/8a/f0/cognos-analytics-with-watson-leadspace-2.component.xl.ts=1709839324792.png/content/adobe-cms/us/en/products/cognos-analytics/_jcr_content/root/leadspace_container/leadspace" alt="" width="900" height="400">
+    </p>
+
+    <p>(IBM Cognos Analytics is an intuitive, easy-to-use tool that integrates reports, analytics, dashboards, and history so businesses of any size can better understand their data and make more effective, confident decisions through automated data visualisation.
+
+    Cognos Analytics uses AI to uncover patterns in your data you didn’t know were there, and natural language generation to communicate those insights to you, so you can spend less time preparing your data and more time analysing and making decisions on what to do next.
+    IBM Cognos Analytics connects to a wide variety of data sources including direct connections and flat files and is available on IBM’s Cloud, hosted in your own Cloud, or on premise.)</p></div>
+</section>
+<footer>
+
+
+
+
+</div>
+
+<div id="Tokyo" class="tabcontent">
+  <h3>QRCode to capture documents</h3>
+
+  <body>
+
+    <p>Click on the "Choose File" button to upload a file:</p>
     
-        <div class="project" id="project1" ><u>NSFAS Project</u> 
-            <p>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG8z2PIGl6tJyLIe8AX0pP_YE5gRoQxjyHhVz_NRVh1A&s" alt="" width="900" height="400">
-            </p>
-            <p>(NSFAS, the National Student Financial Aid Scheme is yet another South African government financial support scheme for assisting potential learners in achieving their academic goals. NSFAS was established in 1991 with
-                this vision and has been there playing an indisputable role by carrying out its financial support programs ever since. The organization has been empowering South Africa socially and economically by improving its funding schemes with new initiatives each year.
-                NSFAS primarily aims at facilitating South African learners who demonstrate a financial need or physical disability and wish to pursue undergraduate and postgraduate studies at a South African public university or Technical and Vocational Education and Training
-                (TVET) college., It truly supports the vision that every learner should have equal access to tertiary education despite their adverse financial or physical conditions.)</p></div>
+    <form action="/MyWebsite.html">
+      <input type="file" id="myFile" name="filename">
+      <input type="submit">
+    </form>
+    
+    </body>
+  
 
-        <div class="project" id="project2" ><u>CRYPTO Wallet</u> 
-            <p>
-                <img src="https://images.idgesg.net/images/article/2019/04/crypto-currency_hand-holding-phone-iwth-bitcoin_digital-wallet_bitcoin_blockchain-100793898-large.jpg?auto=webp&quality=85,70" alt="" width="900" height="400">
-            </p>
-            <p>(Crypto wallets keep your private keys – the passwords that give you access to your cryptocurrencies – safe and accessible, allowing you to send and receive cryptocurrencies like Bitcoin and Ethereum. They come in many forms, from hardware wallets like Ledger (which looks like a USB stick) to mobile apps like Coinbase Wallet, which makes using crypto as easy as shopping with a credit card online.)</p></div>
-        <div class="project" id="project3" ><u>IBM Cognos</u>
-            <p>
-                <img src="https://www.ibm.com/content/dam/connectedassets-adobe-cms/worldwide-content/creative-assets/s-migr/ul/g/8a/f0/cognos-analytics-with-watson-leadspace-2.component.xl.ts=1709839324792.png/content/adobe-cms/us/en/products/cognos-analytics/_jcr_content/root/leadspace_container/leadspace" alt="" width="900" height="400">
-            </p>
+  <p><button onclick="btnQR()">Generate QR Code</button></p>
+  <p id="demo"></p>
+  <img id="my-image" src="https://chart.googleapis.com/chart?cht=qr&chl=https://za.linkedin.com/in/suhail-govender-2aa8752a6&chs=160x160&chld=L|0"style="display: none;">
 
-            <p>(IBM Cognos Analytics is an intuitive, easy-to-use tool that integrates reports, analytics, dashboards, and history so businesses of any size can better understand their data and make more effective, confident decisions through automated data visualisation.
+  <script>
+      function btnQR() {
+          
+          document.getElementById("demo").innerHTML = "Below is a QR Code that will redirect you to my LinkedIn Website"
+          const myImage = document.getElementById("my-image"); 
+          myImage.style.display = "block"; 
 
-            Cognos Analytics uses AI to uncover patterns in your data you didn’t know were there, and natural language generation to communicate those insights to you, so you can spend less time preparing your data and more time analysing and making decisions on what to do next.
-            IBM Cognos Analytics connects to a wide variety of data sources including direct connections and flat files and is available on IBM’s Cloud, hosted in your own Cloud, or on premise.)</p></div>
-    </section>
-    <footer>
-        
-        <p >Contact me at :</p>
-        <p>[suhail@tenetech.co.za]</p>
-        <p >[0817360195]</p>
+      }
 
-        <p><button onclick="btnQR()">Generate QR Code</button></p>
-        <p id="demo"></p>
-        <img id="my-image" src="https://chart.googleapis.com/chart?cht=qr&chl=https://za.linkedin.com/in/suhail-govender-2aa8752a6&chs=160x160&chld=L|0"style="display: none;">
+  </script>
 
-        <script>
-            function btnQR() {
-                
-                document.getElementById("demo").innerHTML = "Below is a QR Code that will redirect you to my LinkedIn Website"
-                const myImage = document.getElementById("my-image"); 
-                myImage.style.display = "block"; 
+</footer>
 
-            }
 
-        </script>
 
-    </footer>
+</div>
 
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
+   
 </body>
-
-
-
-
-</center>
-</html>
+</html> 
