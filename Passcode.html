@@ -70,12 +70,16 @@
 
             // Check if the entered passcode matches the correct passcode
             if (enteredPasscode === correctPasscode) {
-                document.getElementById('message').textContent = 'Yes! Correct passcode entered.';
-                document.getElementById('message').style.color = 'green';
+                // Open a new page or URL upon correct passcode entry
+                window.location.href = 'Selfie.html'; // Replace 'https://example.com' with your desired URL
             } else {
+                // Display message for incorrect passcode
                 document.getElementById('message').textContent = 'Incorrect passcode. Please try again.';
                 document.getElementById('message').style.color = 'red';
             }
+
+            // Clear the input field after verification
+            document.getElementById('passcodeInput').value = '';
         }
 
         // Add form submission event listener
