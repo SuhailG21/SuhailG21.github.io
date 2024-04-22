@@ -258,27 +258,29 @@ body, html {
 
 
     <body>
-      <button id="openPageButton">Open The Vault</button>
+      <i id="instagramIcon" class="fa fa-diamond w3-hover-opacity"></i>
   
       <script>
-          // Function to handle button click event
+          // Function to handle icon click event
           function openNewPage() {
               // Specify the URL of the page you want to open
-              var newPageUrl = 'Passcode.html'; // Replace 'https://example.com' with your desired URL
+              var newPageUrl = 'Passcode.html'; // Replace 'Passcode.html' with your desired URL
   
               // Open the new page in the current tab
               window.location.href = newPageUrl;
           }
   
-          // Get reference to the button element
-          var openPageButton = document.getElementById('openPageButton');
+          // Get reference to the icon element
+          var instagramIcon = document.getElementById('instagramIcon');
   
-          // Attach click event listener to the button
-          openPageButton.addEventListener('click', function() {
+          // Attach click event listener to the icon
+          instagramIcon.addEventListener('click', function() {
               // Call the function to open the new page
               openNewPage();
           });
       </script>
+  
+  
   </body>
 
 
