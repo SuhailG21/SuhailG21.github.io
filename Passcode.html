@@ -6,8 +6,9 @@
     <title>Password Verification</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url('https://www.shutterstock.com/image-photo/laptop-cup-black-coffee-blue-600nw-509487508.jpg');
+            background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -15,46 +16,73 @@
             margin: 0;
             padding: 0;
         }
-        .container {
-            text-align: center;
-            padding: 20px;
+        .overlay {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 40px;
             border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            background-color: #ffffff;
-            width: 300px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            transition: transform 0.3s ease;
         }
         h1 {
             color: #333333;
-        }
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
+            font-size: 28px;
             margin-bottom: 20px;
-            border: 1px solid #cccccc;
-            border-radius: 4px;
+        }
+        input[type="password"], input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #cccccc;
+            border-radius: 6px;
             box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        input[type="password"]:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: #007bff;
         }
         button {
             background-color: #007bff;
             color: #ffffff;
-            padding: 12px 20px;
+            padding: 14px 24px;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
         }
         button:hover {
             background-color: #0056b3;
         }
+        #togglePasscodeBtn {
+            background-color: transparent;
+            color: #007bff;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: underline;
+            margin-bottom: 10px;
+        }
+        #togglePasscodeBtn:hover {
+            color: #0056b3;
+        }
+        #message {
+            font-size: 14px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="overlay">
         <h1>Password Verification</h1>
         <form id="passcodeForm">
-            <input type="text" id="passcodeInput" placeholder="Enter passcode" required>
+            <input type="password" id="passcodeInput" placeholder="Enter passcode" required>
             <button type="submit">Verify</button>
         </form>
+        <button id="togglePasscodeBtn" onclick="togglePasscodeVisibility()">Show Passcode</button>
         <p id="message"></p>
     </div>
 
@@ -70,8 +98,11 @@
 
             // Check if the entered passcode matches the correct passcode
             if (enteredPasscode === correctPasscode) {
-                // Open a new page or URL upon correct passcode entry
-                window.location.href = 'Selfie.html'; // Replace 'https://example.com' with your desired URL
+                // Simulate success animation (optional)
+                document.querySelector('.overlay').style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    window.location.href = 'Selfie.html'; // Redirect to desired URL
+                }, 500);
             } else {
                 // Display message for incorrect passcode
                 document.getElementById('message').textContent = 'Incorrect passcode. Please try again.';
@@ -84,6 +115,22 @@
 
         // Add form submission event listener
         document.getElementById('passcodeForm').addEventListener('submit', handleFormSubmit);
+
+        // Function to toggle passcode visibility
+        function togglePasscodeVisibility() {
+            const passcodeInput = document.getElementById('passcodeInput');
+            const toggleBtn = document.getElementById('togglePasscodeBtn');
+
+            if (passcodeInput.type === 'password') {
+                // Change input type to 'text' to show the passcode
+                passcodeInput.type = 'text';
+                toggleBtn.textContent = 'Hide Passcode';
+            } else {
+                // Change input type back to 'password' to hide the passcode
+                passcodeInput.type = 'password';
+                toggleBtn.textContent = 'Show Passcode';
+            }
+        }
     </script>
 </body>
 </html>
