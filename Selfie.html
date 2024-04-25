@@ -3,54 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Display</title>
+    <title>Display Messages</title>
+    <!-- Include W3.CSS for styling -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
+            background-image: url('https://www.shutterstock.com/image-photo/laptop-cup-black-coffee-blue-600nw-509487508.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
             margin: 0;
-            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            color: #333;
         }
-        .image-container {
-            width: 400px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
             border-radius: 8px;
-            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 600px;
         }
-        .image-container img {
-            width: 100%;
-            display: block;
-            border-radius: 8px 8px 0 0;
-        }
-        .image-caption {
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 0 0 8px 8px;
+        h2 {
             text-align: center;
-            box-sizing: border-box;
+            margin-bottom: 20px;
         }
-        h1 {
-            color: #333333;
-            font-size: 24px;
-            margin-bottom: 10px;
+        #messageList {
+            list-style-type: none;
+            padding: 0;
+            display: none; /* Initially hide the message list */
         }
-        p {
-            color: #666666;
+        .message-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f0f0f0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .message-item h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .message-item p {
+            color: #666;
+        }
+        .toggle-button {
+            display: block;
+            width: 100%;
+            max-width: 200px;
+            margin: 0 auto;
+            padding: 12px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
             font-size: 16px;
-            line-height: 1.5;
+            transition: background-color 0.3s ease;
+        }
+        .toggle-button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <div class="image-container">
-        <img src="Laughing.png" alt="Placeholder Image">
-        <div class="image-caption">
-            <h1>You thought...</h1>
-        </div>
+    <div class="container">
+        <h2>Messages</h2>
+        <button class="toggle-button" onclick="toggleMessageList()">Toggle Messages</button>
+        <ul id="messageList" class="w3-ul w3-card-4"></ul>
     </div>
+
+    <script>
+        function toggleMessageList() {
+            const messageList = document.getElementById('messageList');
+
+            if (messageList.style.display === 'none' || messageList.style.display === '') {
+                displayMessages();
+                messageList.style.display = 'block';
+                // Add event listener to close message list on outside click
+                document.addEventListener('click', closeMessageListOutside);
+            } else {
+                messageList.style.display = 'none';
+                // Remove event listener when message list is closed
+                document.removeEventListener('click', closeMessageListOutside);
+            }
+        }
+
+        function displayMessages() {
+            const messageList = document.getElementById('messageList');
+            messageList.innerHTML = '';
+
+            const messages = JSON.parse(localStorage.getItem('messages')) || [];
+
+            messages.forEach(message => {
+                const li = document.createElement('li');
+                li.className = 'message-item';
+
+                const nameHeading = document.createElement('h3');
+                nameHeading.textContent = message.name;
+
+                const emailParagraph = document.createElement('p');
+                emailParagraph.textContent = `Email: ${message.email}`;
+
+                const messageParagraph = document.createElement('p');
+                messageParagraph.textContent = message.message;
+
+                li.appendChild(nameHeading);
+                li.appendChild(emailParagraph);
+                li.appendChild(messageParagraph);
+
+                messageList.appendChild(li);
+            });
+        }
+
+        function closeMessageListOutside(event) {
+            const messageList = document.getElementById('messageList');
+            const toggleButton = document.querySelector('.toggle-button');
+
+            if (!messageList.contains(event.target) && event.target !== toggleButton) {
+                messageList.style.display = 'none';
+                document.removeEventListener('click', closeMessageListOutside);
+            }
+        }
+    </script>
 </body>
 </html>
