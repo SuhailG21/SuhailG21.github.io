@@ -1,133 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Display Messages</title>
-    <!-- Include W3.CSS for styling -->
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url('https://www.shutterstock.com/image-photo/laptop-cup-black-coffee-blue-600nw-509487508.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #333;
-        }
-        .container {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            width: 80%;
-            max-width: 600px;
-        }
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        #messageList {
-            list-style-type: none;
             padding: 0;
-            display: none; /* Initially hide the message list */
         }
-        .message-item {
-            margin-bottom: 20px;
-            padding: 15px;
-            border-radius: 8px;
-            background-color: #f0f0f0;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .message-item h3 {
-            margin-top: 0;
-            color: #333;
-        }
-        .message-item p {
-            color: #666;
-        }
-        .toggle-button {
-            display: block;
+        #tv_chart_container {
             width: 100%;
-            max-width: 200px;
-            margin: 0 auto;
-            padding: 12px;
-            background-color: #007bff;
-            color: #ffffff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
-        .toggle-button:hover {
-            background-color: #0056b3;
+            height: 600px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Messages</h2>
-        <button class="toggle-button" onclick="toggleMessageList()">Toggle Messages</button>
-        <ul id="messageList" class="w3-ul w3-card-4"></ul>
-    </div>
+    <header>
+        <h1>Trading View of Cryptocurrency</h1>
+    </header>
+    <main>
+        <div id="tv_chart_container"></div>
+    </main>
+    <footer>
+        <p>Powered by <a href="https://www.tradingview.com/">TradingView</a></p>
+    </footer>
 
-    <script>
-        function toggleMessageList() {
-            const messageList = document.getElementById('messageList');
-
-            if (messageList.style.display === 'none' || messageList.style.display === '') {
-                displayMessages();
-                messageList.style.display = 'block';
-                // Add event listener to close message list on outside click
-                document.addEventListener('click', closeMessageListOutside);
-            } else {
-                messageList.style.display = 'none';
-                // Remove event listener when message list is closed
-                document.removeEventListener('click', closeMessageListOutside);
+    <!-- TradingView Widget Configuration -->
+    <script type="text/javascript">
+        new TradingView.widget(
+            {
+                "autosize": true,
+                "symbol": "BINANCE:BTCUSDT",
+                "interval": "D",
+                "timezone": "Etc/UTC",
+                "theme": "light",
+                "style": "1",
+                "locale": "en",
+                "toolbar_bg": "#f1f3f6",
+                "enable_publishing": false,
+                "withdateranges": true,
+                "hide_side_toolbar": false,
+                "allow_symbol_change": true,
+                "container_id": "tv_chart_container"
             }
-        }
-
-        function displayMessages() {
-            const messageList = document.getElementById('messageList');
-            messageList.innerHTML = '';
-
-            const messages = JSON.parse(localStorage.getItem('messages')) || [];
-
-            messages.forEach(message => {
-                const li = document.createElement('li');
-                li.className = 'message-item';
-
-                const nameHeading = document.createElement('h3');
-                nameHeading.textContent = message.name;
-
-                const emailParagraph = document.createElement('p');
-                emailParagraph.textContent = `Email: ${message.email}`;
-
-                const messageParagraph = document.createElement('p');
-                messageParagraph.textContent = message.message;
-
-                li.appendChild(nameHeading);
-                li.appendChild(emailParagraph);
-                li.appendChild(messageParagraph);
-
-                messageList.appendChild(li);
-            });
-        }
-
-        function closeMessageListOutside(event) {
-            const messageList = document.getElementById('messageList');
-            const toggleButton = document.querySelector('.toggle-button');
-
-            if (!messageList.contains(event.target) && event.target !== toggleButton) {
-                messageList.style.display = 'none';
-                document.removeEventListener('click', closeMessageListOutside);
-            }
-        }
+        );
     </script>
 </body>
 </html>
