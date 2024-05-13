@@ -1,24 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradingView Cryptocurrency Dashboard</title>
+    <!-- TradingView Charting Library -->
     <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        main {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px;
         }
         #tv_chart_container {
-            width: 100%;
+            flex: 1;
+            max-width: 70%;
             height: 600px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        #trading-panel {
+            flex: 1;
+            max-width: 30%;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        #trade-history {
+            max-height: 200px;
+            overflow-y: auto;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        #trade-history p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        #trade-history p span {
+            color: #777;
+        }
+        .trade-input {
+            margin-bottom: 10px;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        #trade-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .trade-button {
+            flex: 1;
+            margin-right: 10px;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            background-color: #4CAF50;
+            color: #ffffff;
+            transition: background-color 0.3s ease;
+        }
+        .trade-button:last-child {
+            margin-right: 0;
+        }
+        .trade-button:hover {
+            background-color: #45a049;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Trading View of Cryptocurrency</h1>
+        <h1>TradingView Cryptocurrency Dashboard</h1>
     </header>
     <main>
         <div id="tv_chart_container"></div>
+        <div id="trading-panel">
+            <h2>Trade Panel</h2>
+            <div id="trade-buttons">
+                <button class="trade-button" id="buy-btn">Buy</button>
+                <button class="trade-button" id="sell-btn">Sell</button>
+            </div>
+            <input type="text" class="trade-input" id="quantity" placeholder="Quantity">
+            <input type="text" class="trade-input" id="cryptocurrency" placeholder="Cryptocurrency (e.g., BTC)">
+            <div id="trade-history">
+                <h3>Trade History</h3>
+                <div id="trade-list"></div>
+            </div>
+            <div id="trade-message" style="text-align: center; margin-top: 20px;"></div>
+        </div>
     </main>
     <footer>
         <p>Powered by <a href="https://www.tradingview.com/">TradingView</a></p>
@@ -26,7 +130,8 @@
 
     <!-- TradingView Widget Configuration -->
     <script type="text/javascript">
-        new TradingView.widget(
+        // Initialize TradingView widget
+        var widget = new TradingView.widget(
             {
                 "autosize": true,
                 "symbol": "BINANCE:BTCUSDT",
@@ -43,6 +148,46 @@
                 "container_id": "tv_chart_container"
             }
         );
+
+        // Function to display trade message
+        function displayTradeMessage(message) {
+            document.getElementById("trade-message").textContent = message;
+        }
+
+        // Function to add a trade to trade history
+        function addToTradeHistory(action) {
+            var tradeHistory = document.getElementById("trade-list");
+            var now = new Date();
+            var tradeItem = document.createElement("p");
+            tradeItem.innerHTML = "<span>" + now.toLocaleString() + "</span>: " + action;
+            tradeHistory.insertBefore(tradeItem, tradeHistory.firstChild);
+        }
+
+        // Simulate buy action
+        document.getElementById("buy-btn").addEventListener("click", function() {
+            var quantity = document.getElementById("quantity").value;
+            var cryptocurrency = document.getElementById("cryptocurrency").value.toUpperCase();
+            if (quantity && cryptocurrency) {
+                displayTradeMessage("Buy order simulated!");
+                addToTradeHistory("Bought " + quantity + " " + cryptocurrency);
+                // Your buy order logic here
+            } else {
+                displayTradeMessage("Please enter quantity and cryptocurrency.");
+            }
+        });
+
+        // Simulate sell action
+        document.getElementById("sell-btn").addEventListener("click", function() {
+            var quantity = document.getElementById("quantity").value;
+            var cryptocurrency = document.getElementById("cryptocurrency").value.toUpperCase();
+            if (quantity && cryptocurrency) {
+                displayTradeMessage("Sell order simulated!");
+                addToTradeHistory("Sold " + quantity + " " + cryptocurrency);
+                // Your sell order logic here
+            } else {
+                displayTradeMessage("Please enter quantity and cryptocurrency.");
+            }
+        });
     </script>
 </body>
 </html>
