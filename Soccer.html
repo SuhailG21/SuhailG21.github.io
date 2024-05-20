@@ -4,65 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soccer Team Selector</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
             background-image: url('https://c4.wallpaperflare.com/wallpaper/398/874/541/champions-league-stadium-wallpaper-preview.jpg');
             background-size: cover;
+            background-attachment: fixed;
             margin: 0;
             padding: 0;
             color: #fff;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto; /* Ensure the vertical scrollbar is always visible */
+            height: 100vh; /* Full viewport height */
         }
         h1 {
-            margin: 20px;
-            font-size: 36px;
+            margin: 20px 0;
+            font-size: 48px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
         .input-container {
             margin-bottom: 20px;
             animation: fadeInUp 1s ease forwards;
             opacity: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
         }
         .input-container.show {
             opacity: 1;
         }
         .input-container input {
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #fff;
-            border-radius: 5px;
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 30px;
             margin-right: 10px;
             background-color: rgba(255, 255, 255, 0.8);
             transition: background-color 0.3s ease;
             color: #333;
+            width: 300px;
+            text-align: center;
         }
         .input-container input:focus {
             background-color: rgba(255, 255, 255, 1);
             outline: none;
         }
         .input-container button {
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 15px 25px;
+            font-size: 18px;
             border: none;
-            background-color: #4CAF50;
+            background-color: #28a745;
             color: white;
-            border-radius: 5px;
+            border-radius: 30px;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
         .input-container button:hover {
-            background-color: #45a049;
+            background-color: #218838;
         }
         .tables-container {
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            gap: 20px;
-            margin-bottom: 20px;
+            gap: 40px;
+            margin-bottom: 40px;
             animation: fadeInUp 1s ease forwards;
             opacity: 0;
         }
@@ -71,51 +81,57 @@
         }
         table {
             border-collapse: collapse;
-            width: 300px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            background-color: rgba(255, 255, 255, 0.8);
+            width: 350px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            overflow: hidden;
         }
         th, td {
-            padding: 10px;
+            padding: 15px;
             border-bottom: 1px solid #ddd;
-            text-align: left;
+            text-align: center;
             color: #333;
         }
         th {
             background-color: #4CAF50;
             color: white;
             font-weight: bold;
+            text-transform: uppercase;
         }
         td {
-            background-color: #f2f2f2;
+            background-color: #f9f9f9;
         }
         caption {
-            font-size: 20px;
+            font-size: 24px;
             font-weight: bold;
             margin-bottom: 10px;
             color: #fff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
         button#randomizeButton,
         button#resetButton {
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 15px 30px;
+            font-size: 18px;
             border: none;
-            border-radius: 5px;
+            border-radius: 30px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            margin: 10px;
         }
         button#randomizeButton {
-            background-color: #4CAF50;
+            background-color: #007bff;
             color: white;
-            margin-right: 10px;
         }
         button#resetButton {
-            background-color: #f44336;
+            background-color: #dc3545;
             color: white;
         }
-        button#randomizeButton:hover, button#resetButton:hover {
-            background-color: #333;
+        button#randomizeButton:hover {
+            background-color: #0056b3;
+        }
+        button#resetButton:hover {
+            background-color: #c82333;
         }
 
         @keyframes fadeInUp {
