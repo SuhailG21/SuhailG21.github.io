@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soccer Team Selector</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background-image: url('https://c4.wallpaperflare.com/wallpaper/398/874/541/champions-league-stadium-wallpaper-preview.jpg');
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            overflow: hidden;
+        }
+        h1 {
+            margin: 20px;
+            font-size: 36px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .input-container {
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+        }
+        .input-container.show {
+            opacity: 1;
+        }
+        .input-container input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            margin-right: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            transition: background-color 0.3s ease;
+            color: #333;
+        }
+        .input-container input:focus {
+            background-color: rgba(255, 255, 255, 1);
+            outline: none;
+        }
+        .input-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .input-container button:hover {
+            background-color: #45a049;
+        }
+        .tables-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+        }
+        .tables-container.show {
+            opacity: 1;
+        }
+        table {
+            border-collapse: collapse;
+            width: 300px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+            color: #333;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+        td {
+            background-color: #f2f2f2;
+        }
+        caption {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        button#randomizeButton,
+        button#resetButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button#randomizeButton {
+            background-color: #4CAF50;
+            color: white;
+            margin-right: 10px;
+        }
+        button#resetButton {
+            background-color: #f44336;
+            color: white;
+        }
+        button#randomizeButton:hover, button#resetButton:hover {
+            background-color: #333;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Soccer Team Selector</h1>
+    <div class="input-container" id="inputContainer">
+        <input type="text" id="nameInput" placeholder="Enter player's name...">
+        <button onclick="addName()">Add Player</button>
+    </div>
+
+    <div class="tables-container" id="tablesContainer">
+        <table id="namesTable">
+            <caption>All Players</caption>
+            <thead>
+                <tr>
+                    <th>Player</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Players will be added here dynamically -->
+            </tbody>
+        </table>
+
+        <table id="teamsTable">
+            <caption>Teams</caption>
+            <thead>
+                <tr>
+                    <th>Team 1</th>
+                    <th>Team 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Teams will be added here dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <button id="randomizeButton" onclick="randomizeTeams()">Randomize Teams</button>
+    <button id="resetButton" onclick="resetTables()">Reset</button>
+
+    <script>
+        var namesList = [];
+        var inputContainer = document.getElementById("inputContainer");
+        var tablesContainer = document.getElementById("tablesContainer");
+
+        inputContainer.classList.add("show");
+        tablesContainer.classList.add("show");
+
+        function addName() {
+            var nameInput = document.getElementById("nameInput");
+            var name = nameInput.value.trim();
+            if (name !== "") {
+                namesList.push(name);
+                updateNamesTable();
+                nameInput.value = ""; // Clear input field after adding name
+            }
+        }
+
+        function updateNamesTable() {
+            var namesTable = document.getElementById("namesTable").getElementsByTagName('tbody')[0];
+            namesTable.innerHTML = ""; // Clear the table first
+            namesList.forEach(name => {
+                var newRow = namesTable.insertRow();
+                var cell = newRow.insertCell();
+                cell.appendChild(document.createTextNode(name));
+            });
+        }
+
+        function randomizeTeams() {
+            var team1 = [];
+            var team2 = [];
+
+            // Shuffle names array
+            for (var i = namesList.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                [namesList[i], namesList[j]] = [namesList[j], namesList[i]];
+            }
+
+            // Split names into two teams
+            for (var i = 0; i < namesList.length; i++) {
+                if (i % 2 === 0) {
+                    team1.push(namesList[i]);
+                } else {
+                    team2.push(namesList[i]);
+                }
+            }
+
+            // Display teams
+            var teamsTable = document.getElementById("teamsTable").getElementsByTagName('tbody')[0];
+            teamsTable.innerHTML = "";
+            var maxLength = Math.max(team1.length, team2.length);
+            for (var i = 0; i < maxLength; i++) {
+                var row = teamsTable.insertRow();
+                var cell1 = row.insertCell();
+                var cell2 = row.insertCell();
+                cell1.appendChild(document.createTextNode(team1[i] || ""));
+                cell2.appendChild(document.createTextNode(team2[i] || ""));
+            }
+        }
+
+        function resetTables() {
+            namesList = [];
+            updateNamesTable();
+            var teamsTable = document.getElementById("teamsTable").getElementsByTagName('tbody')[0];
+            teamsTable.innerHTML = "";
+        }
+    </script>
+</body>
+</html>
