@@ -285,77 +285,115 @@ body, html {
     </style>
 </head>
 <body>
-
-  <div class="w3-container">
+    <div class="w3-container">
       <h2>Send a Message</h2>
       <form id="messageForm" class="w3-container">
-          <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
-              <div class="w3-half">
-                  <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name" id="name">
-              </div>
-              <div class="w3-half">
-                  <input class="w3-input w3-border" type="email" placeholder="Email" required name="Email" id="email">
-              </div>
+        <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+          <div class="w3-half">
+            <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name" id="name">
           </div>
-          <input class="w3-input w3-border" type="text" placeholder="Message" required name="Message" id="message">
-          <button class="w3-button w3-black w3-right w3-section" type="button" onclick="sendMessage()">
-              <i class="fa fa-paper-plane"></i> SEND MESSAGE
-          </button>
+          <div class="w3-half">
+            <input class="w3-input w3-border" type="email" placeholder="Email" required name="Email" id="email">
+          </div>
+        </div>
+        <input class="w3-input w3-border" type="text" placeholder="Message" required name="Message" id="message">
+        <button class="w3-button w3-black w3-right w3-section" type="button" onclick="sendMessage()">
+          <i class="fa fa-paper-plane"></i> SEND MESSAGE
+        </button>
       </form>
       <p id="errorMessage" style="display:none; color:red;">Please fill in all the information.</p>
       <p id="successMessage" style="display:none; color:green;">Message sent successfully!</p>
-  </div>
+    </div>
   
-  <script>
+    <script>
       function sendMessage() {
-          const nameInput = document.getElementById('name');
-          const emailInput = document.getElementById('email');
-          const messageInput = document.getElementById('message');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const messageInput = document.getElementById('message');
   
-          const name = nameInput.value;
-          const email = emailInput.value;
-          const message = messageInput.value;
+        const name = nameInput.value;
+        const email = emailInput.value;
+        const message = messageInput.value;
   
-          // Check if any required fields are empty
-          if (!name || !email || !message) {
-              const errorMessage = document.getElementById('errorMessage');
-              errorMessage.style.display = 'block';
+        // Check if any required fields are empty
+        if (!name || !email || !message) {
+          const errorMessage = document.getElementById('errorMessage');
+          errorMessage.textContent = 'Please fill in all the information.';
+          errorMessage.style.display = 'block';
   
-              // Hide error message after 3 seconds
-              setTimeout(() => {
-                  errorMessage.style.display = 'none';
-              }, 3000);
-  
-              return; // Exit function if fields are empty
-          }
-  
-          const messageInfo = {
-              name: name,
-              email: email,
-              message: message
-          };
-  
-          let messages = localStorage.getItem('messages');
-          messages = messages ? JSON.parse(messages) : [];
-          messages.push(messageInfo);
-          localStorage.setItem('messages', JSON.stringify(messages));
-  
-          // Clear form fields
-          nameInput.value = '';
-          emailInput.value = '';
-          messageInput.value = '';
-  
-          // Display success message
-          const successMessage = document.getElementById('successMessage');
-          successMessage.style.display = 'block';
-  
-          // Hide success message after 3 seconds
+          // Hide error message after 3 seconds
           setTimeout(() => {
-              successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
           }, 3000);
-      }
-  </script>
   
+          return; // Exit function if fields are empty
+        }
+  
+        // Validate email format
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+          const errorMessage = document.getElementById('errorMessage');
+          errorMessage.textContent = 'Please enter a valid email address.';
+          errorMessage.style.display = 'block';
+  
+          // Hide error message after 3 seconds
+          setTimeout(() => {
+            errorMessage.style.display = 'none';
+          }, 3000);
+  
+          return; // Exit function if email format is incorrect
+        }
+  
+        const messageInfo = {
+          name: name,
+          email: email,
+          message: message
+        };
+  
+        let messages = localStorage.getItem('messages');
+        messages = messages ? JSON.parse(messages) : [];
+        messages.push(messageInfo);
+        localStorage.setItem('messages', JSON.stringify(messages));
+  
+        // Clear form fields
+        nameInput.value = '';
+        emailInput.value = '';
+        messageInput.value = '';
+  
+        // Display success message
+        const successMessage = document.getElementById('successMessage');
+        successMessage.style.display = 'block';
+  
+        // Hide success message after 3 seconds
+        setTimeout(() => {
+          successMessage.style.display = 'none';
+        }, 3000);
+  
+        // Send email
+        sendEmail(messageInfo);
+      }
+  
+      function sendEmail(messageInfo) {
+        // Use EmailJS to send the email
+        emailjs.send('service_ivx70ok', 'template_rybffbz', {
+          name: messageInfo.name,
+          email: messageInfo.email,
+          message: messageInfo.message
+        }).then((response) => {
+          console.log('Email sent successfully!', response.status, response.text);
+        }, (error) => {
+          console.error('Failed to send email:', error);
+        });
+      }
+    </script>
+  
+    <!-- Include EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+    <script type="text/javascript">
+      (function(){
+        emailjs.init('WE8aMV6cIZA5pZOHz');
+      })();
+    </script>
   </body>
 
 
