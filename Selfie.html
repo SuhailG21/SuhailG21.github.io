@@ -682,20 +682,62 @@
 
         </div>
         <div id="trading-panel" class="tabcontent active">
-            
             <div id="tv_chart_container"></div>
             <div id="trade-history">
                 <h3>Trade History</h3>
                 <div id="trade-list"></div>
             </div>
-            <input type="text" class="trade-input" id="quantity" placeholder="Quantity">
-            <input type="text" class="trade-input" id="cryptocurrency" placeholder="Cryptocurrency (e.g., BTC)">
+            <input type="number" class="trade-input" id="amount" placeholder="Amount">
+            <select class="trade-input" id="currency">
+                <option value="BTC">Bitcoin (BTC)</option>
+                <option value="ETH">Ethereum (ETH)</option>
+                <option value="XRP">Ripple (XRP)</option>
+                <option value="USDT">Tether (USDT)</option>
+            </select>
             <div id="trade-buttons">
                 <button class="trade-button" id="buy-btn">Buy</button>
                 <button class="trade-button" id="sell-btn">Sell</button>
             </div>
             <div id="trade-message"></div>
         </div>
+        <script>
+            document.getElementById('buy-btn').addEventListener('click', function() {
+                recordTrade('Buy');
+            });
+    
+            document.getElementById('sell-btn').addEventListener('click', function() {
+                recordTrade('Sell');
+            });
+    
+            function recordTrade(type) {
+                const amount = document.getElementById('amount').value;
+                const currency = document.getElementById('currency').value;
+                const date = new Date();
+                const dateString = date.toLocaleDateString();
+                const timeString = date.toLocaleTimeString();
+    
+                if (!amount) {
+                    document.getElementById('trade-message').innerText = 'Please enter an amount.';
+                    return;
+                }
+    
+                const tradeEntry = document.createElement('div');
+                tradeEntry.className = 'trade-entry';
+                tradeEntry.innerHTML = `
+                    <strong>${type}</strong> 
+                    <span>${amount} ${currency}</span>
+                    <div>Date: ${dateString}</div>
+                    <div>Time: ${timeString}</div>
+                `;
+    
+                document.getElementById('trade-list').appendChild(tradeEntry);
+    
+                // Clear input fields
+                document.getElementById('amount').value = '';
+                document.getElementById('currency').selectedIndex = 0;
+                document.getElementById('trade-message').innerText = '';
+            }
+        </script>
     </main>
 
     <!-- TradingView Widget Configuration -->
