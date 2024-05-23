@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/Cryptocurrency.css">
+    <title>TradingView Cryptocurrency Dashboard</title>
+    <!-- TradingView Charting Library -->
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+    
+</head>
+<body>
+    <header>
+        <h1>Cryptocurrency Trading Dashboard</h1>
+    </header>
+    <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'profile')">Profile</button>
+        <button class="tablinks" onclick="openTab(event, 'account')">Account</button>
+        <button class="tablinks" onclick="openTab(event, 'wallet')">Wallet</button>
+        <button class="tablinks active" onclick="openTab(event, 'trading-panel')">Trading Panel</button>
+    </div>
+    <main>
+        <div id="profile" class="tabcontent">
+            
+
+            
+        </head>
+        <body>
+            
+            <div class="profile-info">
+                <div class="profile-content">
+                    <label for="name">Name:</label>
+                    <p id="name">John</p>
+        
+                    <label for="surname">Surname:</label>
+                    <p id="surname">Doe</p>
+        
+                    <label for="gender">Gender:</label>
+                    <p id="gender">Male</p>
+        
+                    <label for="dob">Date of Birth:</label>
+                    <p id="dob">January 1, 1990</p>
+        
+                    <label for="address">Address:</label>
+                    <p id="address">123 Main St, City, Country</p>
+        
+                    <label for="kyc">KYC Status:</label>
+                    <p id="kyc">No</p>
+                </div>
+        
+                <button class="edit-btn" onclick="toggleEdit()">Edit Profile</button>
+                <form class="edit-profile-form" onsubmit="saveChanges(); return false;">
+                    <div class="form-group">
+                        <label for="edit-name">Name:</label>
+                        <input type="text" id="edit-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-surname">Surname:</label>
+                        <input type="text" id="edit-surname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-gender">Gender:</label>
+                        <select id="edit-gender" required>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-dob">Date of Birth:</label>
+                        <input type="date" id="edit-dob" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-address">Address:</label>
+                        <input type="text" id="edit-address" required>
+                    </div>
+                    <div class="form-group">
+                        <label>KYC Status:</label>
+                        <div>
+                            <input type="radio" id="edit-kyc-yes" name="edit-kyc" value="Yes" required>
+                            <label for="edit-kyc-yes">Yes</label>
+                            <input type="radio" id="edit-kyc-no" name="edit-kyc" value="No" required>
+                            <label for="edit-kyc-no">No</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save Changes">
+                        <button type="button" class="cancel-btn" onclick="toggleEdit()">Cancel and Lock</button>
+                    </div>
+                </form>
+            </div>
+        
+            <script src="/scripts/Cryptocurrency.js"></script>
+        </body>
+
+
+
+
+
+        </div>
+        <div id="account" class="tabcontent">
+            
+
+            
+        </head>
+        <body>
+            <div class="container">
+                <header>
+                    <h1>Welcome to Your Account</h1>
+                    <p>Manage your account settings and access various features.</p>
+                </header>
+                
+                <!-- My Documents Section -->
+                <div class="section">
+                    <h2 class="section-header">My Documents</h2>
+                    <center>
+                    <p>You can access your documents <a href="MyDocuments.html">here</a>.</p>
+                </center>
+                </div>
+                
+                <!-- About Website Section -->
+                <div class="section">
+                    <h2 class="section-header">About Website</h2>
+                    <center>
+                    <p>Learn more about our website <a href="AboutWebsite.html">here</a>.</p>
+                </center>
+                </div>
+                
+                <!-- Version Section -->
+                <div class="section">
+                    <h2 class="section-header">Version</h2>
+                    <center>
+                    <p>The current version of the website is 2.0.1.</p>
+                </center>
+                </div>
+                
+                <!-- Chat Support Section -->
+                <div class="section">
+                    <div class="support-chat">
+                        <h2>Chat with Support</h2>
+                        <p>If you have any questions or need assistance, feel free to chat with our support team.</p>
+                        <button onclick="startChat()">Start Chat</button>
+                    </div>
+                </div>
+                
+                <!-- Wallet Status Section -->
+                <div class="section">
+                    <div class="wallet-status">
+                        <h2>Wallet Status</h2>
+                        <center>
+                        <p>Your current wallet balance is $12,345.67.</p>
+                    </center>
+                    </div>
+                </div>
+                
+                <!-- Membership Details Section -->
+                <div class="section">
+                    <div class="membership-details">
+                        <h2>Membership Details</h2>
+                        <center>
+                        <p>Your membership level: <strong>Gold</strong></p>
+                        <p>Membership expiration: <strong>Dec 31, 2024</strong></p>
+                        <p>Upgrade your membership <a href="MembershipDetails.html">here</a>.</p>
+                    </center>
+                    </div>
+                </div>
+            </div>
+        
+            <script src="/scripts/Cryptocurrency.js"></script>
+        </body>
+
+
+
+
+
+        </div>
+        <div id="wallet" class="tabcontent">
+           
+
+            
+        </head>
+        <body>
+        
+        <div class="container">
+            
+            <div class="wallet-info">
+                <p><strong>User Name:</strong> John Doe</p>
+                <p><strong>Total Wallet Balance:</strong> $12,345.67</p>
+            </div>
+            <div class="crypto-balances">
+                <div class="crypto">
+                    <h3>Bitcoin (BTC)</h3>
+                    <p>Balance: 0.5 BTC</p>
+                    <p>Value: $5,000.00</p>
+                </div>
+                <div class="crypto">
+                    <h3>Ethereum (ETH)</h3>
+                    <p>Balance: 10 ETH</p>
+                    <p>Value: $3,500.00</p>
+                </div>
+                <div class="crypto">
+                    <h3>Ripple (XRP)</h3>
+                    <p>Balance: 2000 XRP</p>
+                    <p>Value: $3,845.67</p>
+                </div>
+            </div>
+            <div class="transactions">
+                <h2>Recent Transactions</h2>
+                <div class="transaction">
+                    <h3>Trade 1</h3>
+                    <div class="transaction-details">
+                        <p><strong>Date:</strong> 2024-05-10</p>
+                        <p><strong>Type:</strong> Buy</p>
+                        <p><strong>Amount:</strong> 0.1 BTC</p>
+                        <p><strong>Price:</strong> $10,000.00</p>
+                    </div>
+                </div>
+                <div class="transaction">
+                    <h3>Trade 2</h3>
+                    <div class="transaction-details">
+                        <p><strong>Date:</strong> 2024-05-08</p>
+                        <p><strong>Type:</strong> Sell</p>
+                        <p><strong>Amount:</strong> 2 ETH</p>
+                        <p><strong>Price:</strong> $3,400.00</p>
+                    </div>
+                </div>
+                <div class="transaction">
+                    <h3>Trade 3</h3>
+                    <div class="transaction-details">
+                        <p><strong>Date:</strong> 2024-05-05</p>
+                        <p><strong>Type:</strong> Buy</p>
+                        <p><strong>Amount:</strong> 1000 XRP</p>
+                        <p><strong>Price:</strong> $1,950.00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        </body>
+
+
+
+
+
+        </div>
+        <div id="trading-panel" class="tabcontent active">
+            <div id="tv_chart_container"></div>
+            <div id="trade-history">
+                <h3>Trade History</h3>
+                <div id="trade-list"></div>
+            </div>
+            <input type="number" class="trade-input" id="amount" placeholder="Amount">
+            <select class="trade-input" id="currency">
+                <option value="BTC">Bitcoin (BTC)</option>
+                <option value="ETH">Ethereum (ETH)</option>
+                <option value="XRP">Ripple (XRP)</option>
+                <option value="USDT">Tether (USDT)</option>
+            </select>
+            <div id="trade-buttons">
+                <button class="trade-button" id="buy-btn">Buy</button>
+                <button class="trade-button" id="sell-btn">Sell</button>
+            </div>
+            <div id="trade-message"></div>
+        </div>
+        <script src="/scripts/Cryptocurrency.js"></script>
+    </main>
+
+    <!-- TradingView Widget Configuration -->
+    <script src="/scripts/Cryptocurrency.js"></script>
+</body>
+</html>

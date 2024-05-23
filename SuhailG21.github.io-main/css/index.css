@@ -1,0 +1,75 @@
+/* index.html */
+
+
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+body, html {
+  height: 100%;
+  color: #777;
+  line-height: 1.8;
+}
+
+/* Create a Parallax Effect */
+.bgimg-1, .bgimg-2, .bgimg-3 {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  /* First image (Logo. Full height) */
+  .bgimg-1 {
+    background-image: url('https://media.istockphoto.com/id/1483840130/photo/digital-technology-software-development-concept-coding-programmer-software-engineer-working.jpg?s=612x612&w=0&k=20&c=iieyTFcAeRpBylPh8fjiTcql_lcCNuoSNhi9EeOlVbE=');
+    min-height: 100%;
+  }
+  
+  /* Second image (Portfolio) */
+  .bgimg-2 {
+    background-image: url("https://images.unsplash.com/photo-1610563166150-b34df4f3bcd6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c29mdHdhcmUlMjBkZXZlbG9wbWVudHxlbnwwfHwwfHx8MA%3D%3D");
+    min-height: 400px;
+  }
+  
+  /* Third image (Contact) */
+  .bgimg-3 {
+    background-image: url("https://www.shutterstock.com/image-photo/laptop-cup-black-coffee-blue-600nw-509487508.jpg");
+    min-height: 400px;
+  }
+  
+  .w3-wide {letter-spacing: 10px;}
+  .w3-hover-opacity {cursor: pointer;}
+  
+  /* Turn off parallax scrolling for tablets and phones */
+  @media only screen and (max-device-width: 1600px) {
+    .bgimg-1, .bgimg-2, .bgimg-3 {
+      background-attachment: scroll;
+      min-height: 400px;
+    }
+  }
+  
+
+  
+        /* Styling for message list */
+        #messageList {
+            display: none; /* Initially hide the message list */
+            list-style-type: none;
+            padding: 0;
+        }
+        .message-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f5f5f5;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .message-item h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .message-item p {
+            margin-bottom: 5px;
+            color: #666;
+        }
+   
+
+        /*-------------------------------------------------------------------------------------------------------------------*/
+
+        
