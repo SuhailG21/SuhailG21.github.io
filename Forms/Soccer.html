@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soccer Team Selector</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../css/Soccer.css">
+    
+</head>
+<body>
+    <h1>Soccer Team Selector</h1>
+    <div class="input-container" id="inputContainer">
+        <input type="text" id="nameInput" placeholder="Enter player's name...">
+        <button onclick="addName()">Add Player</button>
+    </div>
+
+    <div class="tables-container" id="tablesContainer">
+        <table id="namesTable">
+            <caption>All Players</caption>
+            <thead>
+                <tr>
+                    <th>Player</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Players will be added here dynamically -->
+            </tbody>
+        </table>
+
+        <table id="teamsTable">
+            <caption>Teams</caption>
+            <thead>
+                <tr>
+                    <th>Team 1</th>
+                    <th>Team 2</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Teams will be added here dynamically -->
+            </tbody>
+        </table>
+    </div>
+
+    <button id="randomizeButton" onclick="randomizeTeams()">Randomize Teams</button>
+    <button id="resetButton" onclick="resetTables()">Reset</button>
+
+    <script src="../scripts/Soccer.js"></script>
+</body>
+</html>
