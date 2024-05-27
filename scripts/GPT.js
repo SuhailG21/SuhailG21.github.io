@@ -5,13 +5,13 @@ function loadPage() {
     // Redirect to the selected page
     switch (selectedValue) {
         case "page1":
-            window.location.href = "../hello.html";
+            window.location.href = "../Forms/CryptoGPT.html";
             break;
         case "page2":
-            window.location.href = "../page2.html";
+            window.location.href = "../Forms/CryptoGPT.html";
             break;
         case "page3":
-            window.location.href = "../page3.html";
+            window.location.href = "../Forms/CryptoGPT.html";
             break;
         default:
             // Handle error or default case
