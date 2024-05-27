@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat GPT Message Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .chat-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            padding-right: 10px;
+        }
+        .message {
+            background-color: #f2f2f2;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 5px;
+        }
+        .user-message {
+            background-color: #dff0d8;
+            text-align: right;
+        }
+        .bot-message {
+            background-color: #d9edf7;
+            text-align: left;
+        }
+        .message p {
+            margin: 0;
+        }
+        .message-form {
+            display: flex;
+            align-items: center;
+        }
+        .message-input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        .send-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .send-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-messages" id="chat-messages">
+            <!-- Messages will be displayed here -->
+        </div>
+        <form id="message-form" class="message-form">
+            <input type="text" id="message-input" class="message-input" placeholder="Type your message...">
+            <button type="button" class="send-button">Send</button>
+        </form>
+    </div>
+
+    <script>
+const form = document.getElementById('message-form');
+const messageInput = document.getElementById('message-input');
+const chatMessages = document.getElementById('chat-messages');
+const sendButton = document.querySelector('.send-button');
+
+// Prevent form submission
+form.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission behavior
+});
+
+sendButton.addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent default button behavior
+    const userMessage = messageInput.value.trim();
+    if (userMessage === '') return;
+
+    appendMessage('user', userMessage);
+    // You can send the user message to your server for processing here
+
+    // Simulating bot response
+    setTimeout(function() {
+        const botMessage = 'This is a response from the bot.';
+        appendMessage('bot', botMessage);
+    }, 500);
+    
+    messageInput.value = '';
+    return false; // Prevent form submission
+});
+    
+        function appendMessage(sender, message) {
+            const messageWrapper = document.createElement('div');
+            const className = (sender === 'user') ? 'user-message' : 'bot-message';
+            messageWrapper.classList.add('message', className);
+            messageWrapper.innerHTML = `<p>${message}</p>`;
+            chatMessages.appendChild(messageWrapper);
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+    </script>
+    
+    
+    
+    
+</body>
+</html>
+
+
+
