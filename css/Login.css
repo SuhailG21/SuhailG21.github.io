@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #e9ecef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url('https://t4.ftcdn.net/jpg/04/21/63/19/360_F_421631999_fGyEaVUeGmePXCaU6pdSHikYLnv8AWlf.jpg');
+}
+
+.login-container {
+    background-color: rgba(255, 255, 255, 0.9); /* 0.9 is the alpha value */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+h2 {
+    margin-top: 0;
+    color: #333;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+label {
+    display: block;
+    margin: 15px 0 5px;
+    font-size: 14px;
+    color: #555;
+    text-align: left;
+}
+
+.password-container {
+    position: relative;
+}
+
+.password-container input {
+    width: calc(100% - 50px);
+    display: inline-block;
+}
+
+.password-container button {
+    width: 50px;
+    
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border: none;
+    background: #ddd;
+    cursor: pointer;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-top-left-radius: 25px;
+    margin-bottom: 12px;
+    
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.error-message {
+    color: #e74c3c;
+    display: none;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.footer {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #888;
+}
+
+.loading-bar {
+    display: none;
+    margin: 15px 0;
+    width: 100%;
+    height: 5px;
+    background-color: #f3f3f3;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.loading-bar::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #007bff;
+    animation: loading 2s linear infinite;
+}
+
+@keyframes loading {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
