@@ -7,7 +7,7 @@
     border: 2px solid #ccc;
     border-radius: 10px;
     z-index: 1000;
-    background-color: #f9f9f9;
+    background-image: url('https://assets-global.website-files.com/5e42772e6a8cfd42a9715206/659bb6465301acb6d7c94673_Feature_Chatbot-Examples-Article-Update%20(1).jpg');
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -52,7 +52,7 @@
 
 /* Chat Bubbles from User */
 .bpw-from-user .bpw-chat-bubble .bpw-chat-bubble-content {
-    background-color: #e0e0e0; /* Change to desired user bubble background color */
+    background-color: green; /* Change to desired user bubble background color */
     border-radius: 15px;
     padding: 10px;
     margin: 5px 0;
@@ -71,7 +71,7 @@ a:hover {
 /* Send Button */
 .bpw-send-button {
     background-color: #007bff; /* Change to desired send button color */
-    color: white;
+    color: blue;
     border: none;
     border-radius: 50%;
     padding: 10px;
@@ -107,7 +107,7 @@ a:hover {
 
 /* Quick Reply Buttons */
 .bpw-keyboard-quick_reply {
-    background-color: #f0f0f0;
+    background-color: blue;
     padding: 5px 10px;
     border-radius: 5px;
     margin: 5px 0;
@@ -131,7 +131,7 @@ a:hover {
 
 /* Floating Button */
 .bpw-widget-btn {
-    background-image: url('your-image-url'); /* Change to your desired background image */
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/0/05/Google_Messages_logo.svg'); /* Change to your desired background image */
     background-size: cover;
     width: 50px;
     height: 50px;
