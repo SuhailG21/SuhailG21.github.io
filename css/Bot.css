@@ -237,7 +237,7 @@ html {
   background:url(https://static.vecteezy.com/system/resources/previews/000/437/500/original/vector-chat-icon.jpg);
   background-repeat: no-repeat;
     background-position: center;
-  background-size: contain;
+  background-size: 100%;
   height:undefinedpx !important;
   width:undefinedpx !important;
   }
