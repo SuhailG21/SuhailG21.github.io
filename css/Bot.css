@@ -126,7 +126,7 @@ html {
     text-decoration: underline;
   }
   
-  /* Styling for the chat container, including color, scrollbar width and color, and border */
+   /* Styling for the chat container, including color, scrollbar width and color, and border */
 .bpw-chat-container {
     background-color: #1f1e1e;
     scrollbar-width: thin;
