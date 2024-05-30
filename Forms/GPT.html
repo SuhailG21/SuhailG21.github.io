@@ -31,6 +31,26 @@
         #floatingButton:hover {
             background-color: #005f6b; /* Change to desired hover color */
         }
+
+        /* Loading bar styles */
+        #loadingBarContainer {
+            width: 100%;
+            background-color: #f3f3f3;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        #loadingBar {
+            width: 0%;
+            height: 30px;
+            background-color: #4caf50;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -46,6 +66,10 @@
 
     <button onclick="loadPage()">Load Chatbot</button>
 
+    <div id="loadingBarContainer">
+        <div id="loadingBar">0%</div>
+    </div>
+
     <div id="pageContent"></div>
 </div>
 
@@ -57,6 +81,45 @@
     document.getElementById('floatingButton').addEventListener('click', function() {
         window.location.href = '../index.html';
     });
+
+    function loadPage() {
+        // Show the loading bar
+        document.getElementById('loadingBarContainer').style.display = 'block';
+        let loadingBar = document.getElementById('loadingBar');
+        let width = 0;
+
+        // Simulate API call with a loading bar progress
+        let interval = setInterval(function() {
+            if (width >= 100) {
+                clearInterval(interval);
+                // Simulate loading the content after API call is complete
+                setTimeout(function() {
+                    let pageSelect = document.getElementById('pageSelect').value;
+                    let redirectUrl = '';
+
+                    // Set the redirect URL based on selection
+                    if (pageSelect === 'page1') {
+                        redirectUrl = 'personal.html'; // Change to actual URL
+                    } else if (pageSelect === 'page2') {
+                        redirectUrl = 'nsfas.html'; // Change to actual URL
+                    } else if (pageSelect === 'page3') {
+                        redirectUrl = 'CryptoGPT.html'; // Change to actual URL
+                    }
+
+                    document.getElementById('pageContent').innerHTML = '<p>Chatbot Loaded</p>';
+
+                    // Redirect after displaying "Chatbot Loaded" message
+                    setTimeout(function() {
+                        window.location.href = redirectUrl;
+                    }, 500); // Adjust delay as needed
+                }, 500);
+            } else {
+                width++;
+                loadingBar.style.width = width + '%';
+                loadingBar.innerHTML = width + '%';
+            }
+        }, 30); // Adjust the interval time for faster/slower loading bar
+    }
 </script>
 
 </body>
