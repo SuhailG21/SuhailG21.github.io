@@ -1,75 +1,137 @@
-/* index.html */
+/* styles.css */
 
-
-body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
 body, html {
   height: 100%;
   color: #777;
   line-height: 1.8;
 }
 
+/* Light Mode */
+[data-theme="light"] {
+    --background-color: #ffffff;
+    --text-color: #777;
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+    --background-color: #333333;
+    --text-color: #eeeeee;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+
+/* Add more styles for dark mode if needed */
+
 /* Create a Parallax Effect */
 .bgimg-1, .bgimg-2, .bgimg-3 {
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  
-  /* First image (Logo. Full height) */
-  .bgimg-1 {
-    background-image: url('https://media.istockphoto.com/id/1483840130/photo/digital-technology-software-development-concept-coding-programmer-software-engineer-working.jpg?s=612x612&w=0&k=20&c=iieyTFcAeRpBylPh8fjiTcql_lcCNuoSNhi9EeOlVbE=');
-    min-height: 100%;
-  }
-  
-  /* Second image (Portfolio) */
-  .bgimg-2 {
-    background-image: url("https://images.unsplash.com/photo-1610563166150-b34df4f3bcd6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c29mdHdhcmUlMjBkZXZlbG9wbWVudHxlbnwwfHwwfHx8MA%3D%3D");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* First image (Logo. Full height) */
+.bgimg-1 {
+  background-image: url('https://media.istockphoto.com/id/1483840130/photo/digital-technology-software-development-concept-coding-programmer-software-engineer-working.jpg?s=612x612&w=0&k=20&c=iieyTFcAeRpBylPh8fjiTcql_lcCNuoSNhi9EeOlVbE=');
+  min-height: 100%;
+}
+
+/* Second image (Portfolio) */
+.bgimg-2 {
+  background-image: url("https://images.unsplash.com/photo-1610563166150-b34df4f3bcd6?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c29mdHdhcmUlMjBkZXZlbG9wbWVudHxlbnwwfHwwfHx8MA%3D%3D");
+  min-height: 400px;
+}
+
+/* Third image (Contact) */
+.bgimg-3 {
+  background-image: url("https://www.shutterstock.com/image-photo/laptop-cup-black-coffee-blue-600nw-509487508.jpg");
+  min-height: 400px;
+}
+
+.w3-wide {letter-spacing: 10px;}
+.w3-hover-opacity {cursor: pointer;}
+
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 1600px) {
+  .bgimg-1, .bgimg-2, .bgimg-3 {
+    background-attachment: scroll;
     min-height: 400px;
   }
-  
-  /* Third image (Contact) */
-  .bgimg-3 {
-    background-image: url("https://www.shutterstock.com/image-photo/laptop-cup-black-coffee-blue-600nw-509487508.jpg");
-    min-height: 400px;
-  }
-  
-  .w3-wide {letter-spacing: 10px;}
-  .w3-hover-opacity {cursor: pointer;}
-  
-  /* Turn off parallax scrolling for tablets and phones */
-  @media only screen and (max-device-width: 1600px) {
-    .bgimg-1, .bgimg-2, .bgimg-3 {
-      background-attachment: scroll;
-      min-height: 400px;
-    }
-  }
-  
+}
 
-  
-        /* Styling for message list */
-        #messageList {
-            display: none; /* Initially hide the message list */
-            list-style-type: none;
-            padding: 0;
-        }
-        .message-item {
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 5px;
-            background-color: #f5f5f5;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .message-item h3 {
-            margin-top: 0;
-            color: #333;
-        }
-        .message-item p {
-            margin-bottom: 5px;
-            color: #666;
-        }
-   
+/* Toggle Button Styles */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
 
-        /*-------------------------------------------------------------------------------------------------------------------*/
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "\f185"; /* Unicode for FontAwesome sun icon */
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  color: white;
+  background-color: #f39c12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+  content: "\f186"; /* Unicode for FontAwesome moon icon */
+  background-color: #f1c40f;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
 
         
