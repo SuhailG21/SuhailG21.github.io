@@ -4,10 +4,12 @@
 <title>S.Govender</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/index.css">
+
 
 
 
@@ -53,16 +55,62 @@
 <script src="scripts/index.js"></script>
 
 
+
+
 <!-- First Parallax Image with Logo Text -->
 <div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
   <div class="w3-display-middle" style="white-space:nowrap;">
     <span class="w3-center w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity">💻 MR <span class="w3-hide-small">SUHAIL</span> GOVENDER 💻 </span>
+    <p></p>
+    <center>
+
+  
+      <!-- Toggle Button for Light/Dark Mode -->
+    
+      <div class="toggle-container">
+      
+      <label class="switch">
+          <input type="checkbox" id="toggle-mode">
+          <span class="slider round"></span>
+      </label>
+    </div>
+    </center>
+    
+    <script>
+      const toggleSwitch = document.querySelector('#toggle-mode');
+      const currentTheme = localStorage.getItem('theme');
+    
+      if (currentTheme) {
+          document.documentElement.setAttribute('data-theme', currentTheme);
+    
+          if (currentTheme === 'dark') {
+              toggleSwitch.checked = true;
+          }
+      }
+    
+      function switchTheme(e) {
+          if (e.target.checked) {
+              document.documentElement.setAttribute('data-theme', 'dark');
+              localStorage.setItem('theme', 'dark');
+          } else {
+              document.documentElement.setAttribute('data-theme', 'light');
+              localStorage.setItem('theme', 'light');
+          }
+      }
+    
+      toggleSwitch.addEventListener('change', switchTheme, false);
+    </script>
+
+    
   </div>
+ 
 </div>
 
 <!-- Container (About Section) -->
 <div class="w3-content w3-container w3-padding-64" id="about">
+ 
   <h3 class="w3-center">ABOUT ME</h3>
+  
   <p class="w3-center"><em>I love Information Technology</em></p>
   <p>My love for Information Technology transcends mere admiration; it's an intrinsic part of who I am. From the elegant lines of code that form the backbone of digital solutions to the exhilarating challenge of solving complex technical puzzles, every aspect of IT ignites a fire within me. The endless possibilities, the constant evolution, and the profound impact it has on shaping our world excite and inspire me every day. In the realm of Information Technology, I find not just a passion, but a boundless source of fascination and fulfillment that drives me to pursue excellence and innovation tirelessly.</p>
   <div class="w3-row">
@@ -75,6 +123,9 @@
     <div class="w3-col m6 w3-hide-small w3-padding-large">
       <p>Welcome to my personal website, your digital window into my world. Here, you'll find a curated collection of my passions, endeavors, and reflections. Through a blend of multimedia elements, including captivating visuals, thought-provoking blog posts, and perhaps even snippets of code or creative projects, I invite you to explore the facets of my life and interests. From my adventures in travel to my musings on literature, technology, and everything in between, this site serves as a canvas for self-expression and connection. Whether you're here to glean insights, seek inspiration, or simply share in the journey, I hope you find this virtual space to be both engaging and enriching. Thank you for visiting, and welcome to my digital home.</p>
     </div>
+    
+
+
   </div>
   <p class="w3-large w3-center w3-padding-16">Im really good at:</p>
   <p class="w3-wide"><i class="fa fa-cubes"></i>Software Programming</p>
