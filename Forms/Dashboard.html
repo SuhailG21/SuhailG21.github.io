@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dashboard</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <style>
+    /* Dark Mode */
+    body {
+      background-color: #222;
+      color: #fff;
+    }
+    .navbar-inverse {
+      background-color: #333;
+      border-color: #444;
+    }
+    .nav-pills > li.active > a,
+    .nav-pills > li.active > a:hover,
+    .nav-pills > li.active > a:focus {
+      background-color: #444;
+      color: #fff;
+    }
+    .well {
+      background-color: #333;
+      border: 1px solid #444;
+      color: #fff;
+    }
+  </style>
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse visible-xs">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Suhail Govender</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+        <li><a href="../index.html"><i class="fas fa-home"></i> Return to Home </a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav hidden-xs">
+      <h2><i class="fas fa-user"></i> Suhail Govender</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active"><a href="#section1"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+        <li><a href="../index.html"><i class="fas fa-home"></i> Return to Home</a></li>
+        
+      </ul><br>
+    </div>
+    <br>
+    
+    <div class="col-sm-9">
+      <div class="well">
+        <h4><i class="fas fa-tachometer-alt"></i> Dashboard</h4>
+        <p>This is my dashboard, it is still under development</p>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+            <div class="well">
+              <h4><i class="fas fa-users"></i> Users</h4>
+              <canvas id="userChart" width="200" height="200"></canvas>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="well">
+              <h4><i class="fas fa-file-alt"></i> Pages</h4>
+              <canvas id="pageChart" width="200" height="200"></canvas>
+            </div>
+          </div>
+
+          <script>
+            // Users Chart
+var userChartCtx = document.getElementById('userChart').getContext('2d');
+var userChart = new Chart(userChartCtx, {
+  type: 'bar',
+  data: {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    datasets: [{
+      label: 'Users',
+      data: [65, 59, 80, 81, 56, 55, 40],
+      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      borderColor: 'rgba(255, 99, 132, 1)',
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
+  }
+});
+
+// Pages Chart
+var pageChartCtx = document.getElementById('pageChart').getContext('2d');
+var pageChart = new Chart(pageChartCtx, {
+  type: 'bar',
+  data: {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    datasets: [{
+      label: 'Pages',
+      data: [40, 55, 56, 81, 80, 59, 65],
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+      borderColor: 'rgba(54, 162, 235, 1)',
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }]
+    }
+  }
+});
+          </script>
+          
+
+
+          <div class="col-sm-3">
+            <div class="well">
+              <h4><i class="fas fa-clock"></i> Sessions</h4>
+              <canvas id="sessionChart" width="200" height="200"></canvas>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="well">
+              <h4><i class="fas fa-bolt"></i> Bounce</h4>
+              <canvas id="bounceChart" width="200" height="200"></canvas>
+            </div>
+          </div>
+<script>
+          // Sessions Chart
+ var sessionChartCtx = document.getElementById('sessionChart').getContext('2d');
+ var sessionChart = new Chart(sessionChartCtx, {
+   type: 'line',
+   data: {
+     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+     datasets: [{
+       label: 'Sessions',
+       data: [12, 19, 3, 5, 2, 3, 7],
+       fill: false,
+       borderColor: 'rgba(75, 192, 192, 1)',
+       borderWidth: 1
+     }]
+   },
+   options: {
+     scales: {
+       yAxes: [{
+         ticks: {
+           beginAtZero: true
+         }
+       }]
+     }
+   }
+ });
+
+ // Bounce Chart
+var bounceChartCtx = document.getElementById('bounceChart').getContext('2d');
+var bounceChart = new Chart(bounceChartCtx, {
+type: 'pie',
+data: {
+labels: ['Bounced', 'Not Bounced'],
+datasets: [{
+data: [30, 70],
+backgroundColor: [
+'rgba(255, 99, 132, 0.5)',
+'rgba(54, 162, 235, 0.5)'
+],
+borderColor: [
+'rgba(255, 99, 132, 1)',
+'rgba(54, 162, 235, 1)'
+],
+borderWidth: 1
+}]
+},
+options: {
+responsive: false,
+maintainAspectRatio: false,
+legend: {
+position: 'right'
+},
+layout: {
+padding: {
+left: 10,
+right: 10,
+top: 10,
+bottom: 10
+}
+}
+}
+});
+</script>
+
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="well">
+            <h4><i class="fas fa-cog"></i> Settings</h4>
+            <p>Configure your settings here.</p> 
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <h4><i class="fas fa-bell"></i> Notifications</h4>
+            <p>Manage your notifications.</p> 
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <h4><i class="fas fa-chart-pie"></i> Analytics</h4>
+            <p>View detailed analytics.</p> 
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8">
+          <div class="well">
+            <h4><i class="fas fa-comment-alt"></i> Feedback</h4>
+            <p>Provide your valuable feedback here.</p> 
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="well">
+            <h4><i class="fas fa-question-circle"></i> Help</h4>
+            <p>Need assistance? Get help here.</p> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
