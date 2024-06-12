@@ -1,10 +1,10 @@
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <title>S.Govender</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -179,53 +179,83 @@
 </div>
 
 <!-- Container (Portfolio Section) -->
-<div class="w3-content w3-container w3-padding-64" id="portfolio">
+
   <h3 class="w3-center">MY Qualifications</h3>
   <p class="w3-center"><em>Here are some of my Qualifications<br> Click on the images to make them bigger</em></p><br>
 
   <!-- Responsive Grid. Four columns on tablets, laptops and desktops. Will stack on mobile devices/small screens (100% width) -->
-  <div class="w3-row-padding w3-center">
+  <div class="w3-row-padding w3-center qualifications">
     <div class="w3-col m3">
-      <img src="Images/CertifiedBlockchainExpert.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Certified Blockchain Expert">
+        <img src="Images/CertifiedBlockchainExpert.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Certified Blockchain Expert">
     </div>
 
     <div class="w3-col m3">
-      <img src="Images/CertifiedCryptocurrencyExpert.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Certified Cryptocurrency Expert">
+        <img src="Images/CertifiedCryptocurrencyExpert.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Certified Cryptocurrency Expert">
     </div>
 
     <div class="w3-col m3">
-      <img src="Images/CertifiedNFTExpert.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Certified NFT Expert">
+        <img src="Images/CertifiedNFTExpert.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Certified NFT Expert">
     </div>
 
     <div class="w3-col m3">
-      <img src="Images/CertifiedMetaverseExpert.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Certified Metaverse Expert">
+        <img src="Images/CertifiedMetaverseExpert.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Certified Metaverse Expert">
     </div>
+
+    <!-- Hidden qualifications -->
+    <div class="w3-col m3 hidden">
+      <img src="https://www.tutorialspoint.com/javascript/images/javascript.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Diploma in Applications Development">
   </div>
 
-  <div class="w3-row-padding w3-center w3-section">
-    <div class="w3-col m3">
-      <img src="https://www.tutorialspoint.com/javascript/images/javascript.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Diploma in Applications Development">
-    </div>
-
-    <div class="w3-col m3">
+  <div class="w3-col m3 hidden">
       <img src="Images/MyPic.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="FirePro Certificate">
-    </div>
+  </div>
 
-    <div class="w3-col m3">
+  <div class="w3-col m3 hidden">
       <img src="Images/HighDistinction.jpeg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Highest Distinction Mathematics">
-    </div>
+  </div>
 
-    <div class="w3-col m3">
+  <div class="w3-col m3 hidden">
       <img src="Images/Cyber.jpeg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="CyberSecurity Est">
-    </div>
+  </div>
 
-       <div class="w3-col m3">
+  <div class="w3-col m3 hidden">
       <img src="Images/Iot.jpeg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="IoT Est">
-    </div>
-    
-    <button class="w3-button w3-padding-large w3-light-grey" style="margin-top:64px">LOAD MORE</button>
   </div>
 </div>
+<center>
+  <p></p>
+  <button class="w3-button w3-padding-large w3-light-grey load-more">LOAD MORE</button>
+  <p></p>
+  </center>
+
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const loadMoreButton = document.querySelector(".load-more");
+    const hiddenQualifications = document.querySelectorAll(".qualifications .hidden");
+
+    loadMoreButton.addEventListener("click", function () {
+        hiddenQualifications.forEach(function (qualification) {
+            qualification.classList.toggle("show"); // Toggle .show instead of .hidden
+        });
+
+        // Toggle button text
+        if (loadMoreButton.textContent === "LOAD MORE") {
+            loadMoreButton.textContent = "HIDE";
+        } else {
+            loadMoreButton.textContent = "LOAD MORE";
+            // Add a timeout to ensure the transition properties are applied before hiding the qualifications
+            setTimeout(function () {
+                hiddenQualifications.forEach(function (qualification) {
+                    qualification.classList.remove("show");
+                });
+            }, 100); // Adjust the timeout value as needed
+        }
+    });
+});
+
+
+</script>
+
 
 <!-- Modal for full size images on click-->
 <div id="modal01" class="w3-modal w3-black" onclick="this.style.display='none'">
@@ -275,10 +305,10 @@
       <form id="messageForm" class="w3-container">
         <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
           <div class="w3-half">
-            <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name" id="name">
+            <input class="w3-input w3-border" type="text" placeholder="Name and Surname " required name="Name" id="name">
           </div>
           <div class="w3-half">
-            <input class="w3-input w3-border" type="email" placeholder="Email" required name="Email" id="email">
+            <input class="w3-input w3-border" type="email" placeholder="email@email.com " required name="Email" id="email">
           </div>
         </div>
         <input class="w3-input w3-border" type="text" placeholder="Message" required name="Message" id="message">
