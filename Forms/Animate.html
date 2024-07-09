@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #333333;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #eeeeee;
+            
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .animation-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        /* Keyframe animation */
+        .rotateBox {
+            background-color: #ff5733;
+            animation: rotateBox 5s infinite;
+        }
+
+        @keyframes rotateBox {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Transition animation */
+        .scaleBox {
+            background-color: #33c3ff;
+            transition: transform 0.5s;
+        }
+
+        .scaleBox:hover {
+            transform: scale(1.5);
+        }
+
+        /* Hover animation */
+        .colorChange {
+            background-color: #33ff77;
+            animation: colorChange 1s infinite;
+        }
+
+        @keyframes colorChange {
+            0% { background-color: #33ff77; }
+            50% { background-color: #ff33e6; }
+            100% { background-color: #33ff77; }
+        }
+
+        /* Interactive animation */
+        .bounce {
+            background-color: #ff33a8;
+            cursor: pointer;
+            position: relative;
+            animation: bounce 0.5s;
+        }
+
+        @keyframes bounce {
+            0% { top: 0; }
+            50% { top: -20px; }
+            100% { top: 0; }
+        }
+
+        /* Pulse animation */
+        .pulse {
+            background-color: #ffb833;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+
+        /* Slide animation */
+        .slideIn {
+            background-color: #33ffd2;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slideIn::after {
+            content: '';
+            background-color: #ff8c33;
+            position: absolute;
+            width: 200%;
+            height: 100%;
+            top: 0;
+            left: -100%;
+            animation: slideIn 3s infinite;
+        }
+
+        @keyframes slideIn {
+            0% { left: -100%; }
+            50% { left: 0%; }
+            100% { left: 100%; }
+        }
+
+        /* Ripple animation */
+        .ripple {
+            background-color: #3399ff;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .ripple::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            opacity: 0;
+            transform: scale(1);
+            animation: ripple 1s;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(10);
+                opacity: 0;
+            }
+        }
+
+        /* Complex animation */
+        .complexAnimation {
+            background-color: #ff3399;
+            animation: complexAnimation 10s infinite;
+        }
+
+        @keyframes complexAnimation {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            25% { transform: translate(50px, -50px) rotate(90deg) scale(1.2); }
+            50% { transform: translate(100px, 0) rotate(180deg) scale(0.8); }
+            75% { transform: translate(50px, 50px) rotate(270deg) scale(1.2); }
+            100% { transform: translate(0, 0) rotate(360deg) scale(1); }
+        }
+
+        /* Utility classes */
+        .hidden {
+            display: none;
+        }
+
+/* Styling for the dropdown box */
+#animationSelect {
+    padding: 12px 20px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    margin-right: 15px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns%3D%27http%3A//www.w3.org/2000/svg%27 width%3D%2716%27 height%3D%2716%27 fill%3D%27none%27 stroke%3D%27%23333%27 stroke-width%3D%272%27 stroke-linecap%3D%27round%27 stroke-linejoin%3D%27round%27%3E%3Cpolyline points%3D%276%202%2010%206%206%2010%27/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+}
+
+#animationSelect:focus {
+    border-color: #66afe9;
+    box-shadow: 0 0 10px rgba(102, 175, 233, 0.6);
+    outline: none;
+}
+
+/* Styling for the action button */
+#playButton {
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+#playButton:hover {
+    background-color: #0056b3;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+#playButton:active {
+    background-color: #00408f;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+    </style>
+</head>
+<body>
+
+<h1>Interactive Animations</h1>
+
+<div class="controls">
+    <select id="animationSelect">
+        <option value="rotateBox">Rotate</option>
+        <option value="scaleBox">Scale</option>
+        <option value="colorChange">Color</option>
+        <option value="bounce">Bounce</option>
+        <option value="pulse">Pulse</option>
+        <option value="slideIn">Slide</option>
+        <option value="ripple">Ripple</option>
+        <option value="complexAnimation">Complex</option>
+    </select>
+    <button id="playButton">Play Animation</button>
+</div>
+
+<div class="animation-container">
+    <div id="animatedBox" class="box hidden"></div>
+</div>
+
+<script>
+    document.getElementById('playButton').addEventListener('click', () => {
+        const selectedAnimation = document.getElementById('animationSelect').value;
+        const animatedBox = document.getElementById('animatedBox');
+
+        // Remove all animation classes
+        animatedBox.className = 'box hidden';
+
+        // Force reflow to reset animation
+        void animatedBox.offsetWidth;
+
+        // Add the selected animation class
+        animatedBox.classList.remove('hidden');
+        animatedBox.classList.add(selectedAnimation);
+    });
+
+    // Special handling for Scale animation to enable hover effect
+    document.getElementById('animationSelect').addEventListener('change', (event) => {
+        const selectedAnimation = event.target.value;
+        const animatedBox = document.getElementById('animatedBox');
+
+        if (selectedAnimation === 'scaleBox') {
+            animatedBox.classList.add('scaleBox');
+        } else {
+            animatedBox.classList.remove('scaleBox');
+        }
+    });
+
+    document.getElementById('animatedBox').addEventListener('mouseover', (event) => {
+        if (event.target.classList.contains('scaleBox')) {
+            event.target.style.transform = 'scale(1.5)';
+        }
+    });
+
+    document.getElementById('animatedBox').addEventListener('mouseout', (event) => {
+        if (event.target.classList.contains('scaleBox')) {
+            event.target.style.transform = 'scale(1)';
+        }
+    });
+</script>
+
+</body>
+<script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+    <script src="https://mediafiles.botpress.cloud/bfeb6d98-49ff-43ba-81a5-71890d2812c8/webchat/config.js" defer></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        #floatingButton {
+            position: fixed;
+            top: 20px; /* Adjust as needed */
+            left: 20px; /* Adjust as needed */
+            background-color: blue; /* Change to desired color */
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+            font-size: 20px;
+            z-index: 1000; /* Ensure it is above other elements */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #floatingButton:hover {
+            background-color: #005f6b; /* Change to desired hover color */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Button -->
+    <button id="floatingButton"><i class="fas fa-home"></i></button>
+
+    <script>
+        document.getElementById('floatingButton').addEventListener('click', function() {
+            window.location.href = '../index.html';
+        });
+    </script>
+
+</body>
+    </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
