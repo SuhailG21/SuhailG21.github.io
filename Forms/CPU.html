@@ -82,7 +82,7 @@
     /* CPU Core Bars */
     .cores {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 30px;
       width: 100%;
       max-width: 800px;
@@ -114,28 +114,18 @@
       color: #aaa;
     }
 
-    /* Tooltip Styling */
-    .tooltip {
-      position: absolute;
-      top: -25px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: rgba(0, 0, 0, 0.8);
-      color: white;
-      padding: 5px 10px;
-      border-radius: 5px;
-      font-size: 0.9em;
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity 0.3s ease;
+    /* Smooth color transitions for core load */
+    @keyframes colorChange {
+      0% { background: linear-gradient(90deg, #ff6f61, #66ccff); }
+      50% { background: linear-gradient(90deg, #66ccff, #00ffcc); }
+      100% { background: linear-gradient(90deg, #00ffcc, #ff6f61); }
     }
 
-    .core:hover .tooltip {
-      visibility: visible;
-      opacity: 1;
+    .core .core-load {
+      animation: colorChange 3s infinite;
     }
 
-    /* Information Box */
+    /* Additional visual elements */
     .info-box {
       background-color: rgba(0, 0, 0, 0.7);
       border-radius: 8px;
@@ -158,17 +148,6 @@
       font-size: 1em;
       color: #aaa;
       line-height: 1.6;
-    }
-
-    /* Slider for Dynamic Cores */
-    .slider-container {
-      margin-top: 20px;
-      color: #aaa;
-    }
-
-    .slider-label {
-      font-size: 1.1em;
-      margin-bottom: 5px;
     }
 
     /* Footer */
@@ -195,12 +174,6 @@
       <!-- Core elements will be dynamically created here -->
     </div>
 
-    <!-- Slider to adjust the number of CPU cores -->
-    <div class="slider-container">
-      <div class="slider-label">Number of Cores:</div>
-      <input type="range" id="coreSlider" min="1" max="32" value="16" step="1" />
-    </div>
-
     <!-- Information Box -->
     <div class="info-box">
       <div class="info-title">CPU Load Information</div>
@@ -215,28 +188,24 @@
   <div class="footer">Simulating live CPU load across multiple cores. Data refreshes every second.</div>
 
   <script>
-    let coreCount = 16;  // Default number of CPU cores
+    const coreCount = 16;  // Number of CPU cores
     const coreContainer = document.getElementById("coreContainer");
     const cpuGauge = document.getElementById("cpuGauge");
     const gaugeValue = document.getElementById("gaugeValue");
-    const coreSlider = document.getElementById("coreSlider");
 
     // Create core elements dynamically
-    function createCores() {
-      coreContainer.innerHTML = '';  // Clear existing cores
-      for (let i = 0; i < coreCount; i++) {
-        const core = document.createElement("div");
-        core.classList.add("core");
-        core.innerHTML = `
-          <div class="core-load" style="width: 0%;"></div>
-          <div class="core-label">Core ${i + 1}</div>
-          <div class="tooltip">0%</div>
-        `;
-        coreContainer.appendChild(core);
-      }
+    for (let i = 0; i < coreCount; i++) {
+      const core = document.createElement("div");
+      core.classList.add("core");
+      core.innerHTML = `
+        <div class="core-load" style="width: 0%;"></div>
+        <div class="core-label">Core ${i + 1}</div>
+        
+      `;
+      coreContainer.appendChild(core);
     }
 
-    // Update CPU load for each core and overall load
+    // Function to update CPU load for each core and overall load
     function updateCpuLoad() {
       let totalLoad = 0;
 
@@ -245,9 +214,7 @@
         totalLoad += loadPercent;
 
         const coreLoad = core.querySelector(".core-load");
-        const tooltip = core.querySelector(".tooltip");
         coreLoad.style.width = `${loadPercent}%`;
-        tooltip.textContent = `${loadPercent}%`;
 
         // Update color based on load level
         if (loadPercent > 75) {
@@ -257,30 +224,18 @@
         } else if (loadPercent > 25) {
           coreLoad.style.background = "linear-gradient(90deg, #66ccff, #00ffcc)";
         } else {
-          coreLoad.style.background = "linear-gradient(90deg, #00ffcc, #4caf50)";
+          coreLoad.style.background = "linear-gradient(90deg, #66ff66, #00ffcc)";
         }
       });
 
+      // Calculate average load and update the gauge
       const averageLoad = Math.floor(totalLoad / coreCount);
-      updateCpuGauge(averageLoad);
+      cpuGauge.style.background = `conic-gradient(#00ffcc ${averageLoad}%, #333 ${averageLoad}%)`;
+      gaugeValue.innerText = `${averageLoad}`;
     }
 
-    // Update the CPU gauge based on the average load
-    function updateCpuGauge(load) {
-      cpuGauge.style.background = `conic-gradient(#00ffcc ${load}%, #333 ${load}%)`;
-      gaugeValue.textContent = load;
-    }
-
-    // Slider event listener to update the number of cores
-    coreSlider.addEventListener("input", (e) => {
-      coreCount = e.target.value;
-      createCores();  // Recreate the cores based on new value
-    });
-
-    // Initial setup
-    createCores();
-    setInterval(updateCpuLoad, 1000);  // Update every second
-
+    // Update CPU load every second
+    setInterval(updateCpuLoad, 1000);
   </script>
 </body>
 </html>
