@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CPU Load Simulation</title>
+  <style>
+    /* General styling */
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #121212;
+      color: #ffffff;
+      padding: 20px;
+      margin: 0;
+      overflow: auto; /* Allow scrollbars if content exceeds the view height */
+      height: 100vh;
+    }
+    h1 {
+      color: #66ccff;
+      font-size: 2.5em;
+      margin-bottom: 40px;
+      font-weight: bold;
+    }
+
+    /* Container styling */
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      margin-top: 30px;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    /* CPU Gauge Styling */
+    .gauge {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: conic-gradient(#00ffcc 0% 0%, #333 0%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 40px rgba(0, 255, 204, 0.7), 0 0 70px rgba(0, 255, 204, 0.5);
+      animation: pulse 2s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { box-shadow: 0 0 30px rgba(0, 255, 204, 0.5); }
+      to { box-shadow: 0 0 70px rgba(0, 255, 204, 0.7); }
+    }
+
+    .gauge-value {
+      font-size: 5em;
+      position: absolute;
+      color: #ffcc00;
+      font-weight: bold;
+      z-index: 2;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .percentage-sign {
+      font-size: 1.5em;
+      color: #ffcc00;
+      position: absolute;
+      bottom: -20px;
+      right: 15px;
+    }
+
+    .gauge-label {
+      font-size: 1.2em;
+      color: #aaa;
+      position: absolute;
+      top: -40px;
+    }
+
+    /* CPU Core Bars */
+    .cores {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      width: 100%;
+      max-width: 800px;
+      margin-top: 50px;
+    }
+
+    .core {
+      background-color: #333;
+      height: 50px;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.1);
+      transition: all 0.5s ease;
+    }
+
+    .core .core-load {
+      height: 100%;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #ff6f61, #66ccff);
+      transition: width 0.5s ease;
+    }
+
+    .core-label {
+      position: absolute;
+      left: 10px;
+      top: -25px;
+      font-size: 1em;
+      color: #aaa;
+    }
+
+    /* Tooltip Styling */
+    .tooltip {
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.9em;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .core:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* Information Box */
+    .info-box {
+      background-color: rgba(0, 0, 0, 0.7);
+      border-radius: 8px;
+      padding: 15px;
+      color: #fff;
+      box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
+      width: 100%;
+      max-width: 600px;
+      margin-top: 50px;
+    }
+
+    .info-title {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #66ccff;
+      margin-bottom: 15px;
+    }
+
+    .info-text {
+      font-size: 1em;
+      color: #aaa;
+      line-height: 1.6;
+    }
+
+    /* Slider for Dynamic Cores */
+    .slider-container {
+      margin-top: 20px;
+      color: #aaa;
+    }
+
+    .slider-label {
+      font-size: 1.1em;
+      margin-bottom: 5px;
+    }
+
+    /* Footer */
+    .footer {
+      font-size: 0.9em;
+      color: #aaa;
+      margin-top: 80px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Simulated CPU Load</h1>
+
+  <div class="container">
+    <!-- CPU Gauge -->
+    <div class="gauge" id="cpuGauge">
+      <div class="gauge-value" id="gaugeValue">0</div>
+      <div class="percentage-sign">%</div>
+      <div class="gauge-label">Overall CPU Load</div>
+    </div>
+
+    <!-- CPU Core Bars -->
+    <div class="cores" id="coreContainer">
+      <!-- Core elements will be dynamically created here -->
+    </div>
+
+    <!-- Slider to adjust the number of CPU cores -->
+    <div class="slider-container">
+      <div class="slider-label">Number of Cores:</div>
+      <input type="range" id="coreSlider" min="1" max="32" value="16" step="1" />
+    </div>
+
+    <!-- Information Box -->
+    <div class="info-box">
+      <div class="info-title">CPU Load Information</div>
+      <div class="info-text">
+        This simulation visualizes the load on multiple CPU cores. The pie chart represents the overall CPU load, while the bar chart shows the individual load per core.
+        <br><br>
+        Each core's load is randomly generated and updated in real-time, creating a dynamic representation of CPU utilization.
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">Simulating live CPU load across multiple cores. Data refreshes every second.</div>
+
+  <script>
+    let coreCount = 16;  // Default number of CPU cores
+    const coreContainer = document.getElementById("coreContainer");
+    const cpuGauge = document.getElementById("cpuGauge");
+    const gaugeValue = document.getElementById("gaugeValue");
+    const coreSlider = document.getElementById("coreSlider");
+
+    // Create core elements dynamically
+    function createCores() {
+      coreContainer.innerHTML = '';  // Clear existing cores
+      for (let i = 0; i < coreCount; i++) {
+        const core = document.createElement("div");
+        core.classList.add("core");
+        core.innerHTML = `
+          <div class="core-load" style="width: 0%;"></div>
+          <div class="core-label">Core ${i + 1}</div>
+          <div class="tooltip">0%</div>
+        `;
+        coreContainer.appendChild(core);
+      }
+    }
+
+    // Update CPU load for each core and overall load
+    function updateCpuLoad() {
+      let totalLoad = 0;
+
+      Array.from(coreContainer.children).forEach((core, i) => {
+        const loadPercent = Math.floor(Math.random() * 100); // Random load for each core
+        totalLoad += loadPercent;
+
+        const coreLoad = core.querySelector(".core-load");
+        const tooltip = core.querySelector(".tooltip");
+        coreLoad.style.width = `${loadPercent}%`;
+        tooltip.textContent = `${loadPercent}%`;
+
+        // Update color based on load level
+        if (loadPercent > 75) {
+          coreLoad.style.background = "linear-gradient(90deg, #ff3333, #ff6f61)";
+        } else if (loadPercent > 50) {
+          coreLoad.style.background = "linear-gradient(90deg, #ff6f61, #66ccff)";
+        } else if (loadPercent > 25) {
+          coreLoad.style.background = "linear-gradient(90deg, #66ccff, #00ffcc)";
+        } else {
+          coreLoad.style.background = "linear-gradient(90deg, #00ffcc, #4caf50)";
+        }
+      });
+
+      const averageLoad = Math.floor(totalLoad / coreCount);
+      updateCpuGauge(averageLoad);
+    }
+
+    // Update the CPU gauge based on the average load
+    function updateCpuGauge(load) {
+      cpuGauge.style.background = `conic-gradient(#00ffcc ${load}%, #333 ${load}%)`;
+      gaugeValue.textContent = load;
+    }
+
+    // Slider event listener to update the number of cores
+    coreSlider.addEventListener("input", (e) => {
+      coreCount = e.target.value;
+      createCores();  // Recreate the cores based on new value
+    });
+
+    // Initial setup
+    createCores();
+    setInterval(updateCpuLoad, 1000);  // Update every second
+
+  </script>
+</body>
+</html>
