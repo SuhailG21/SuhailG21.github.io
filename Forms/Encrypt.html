@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encryption Portal</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+    <style>
+        /* General styling */
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #111;
+            color: #00ff00;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto; /* Allow scrolling */
+        }
+
+        h1 {
+            color: #00ff00;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        /* Main container */
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #1a1a1a;
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+            margin-top: 40px; /* Added margin to prevent overlapping */
+        }
+
+        /* Headings for each section */
+        h2 {
+            color: #00ff00;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        /* Labels */
+        label {
+            font-size: 1em;
+            color: #00ff00;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+
+        /* Input and text areas */
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #00ff00;
+            background-color: #0a0a0a;
+            color: #00ff00;
+            font-size: 1.1em;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        /* Buttons */
+        button {
+            padding: 12px 20px;
+            background-color: #00ff00;
+            color: #0a0a0a;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button:hover {
+            background-color: #009900;
+        }
+
+        /* Console box for displaying terminal-like messages */
+        .console-box {
+            width: 100%;
+            height: 200px;
+            background-color: #0a0a0a;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            border: 2px solid #00ff00;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            button {
+                font-size: 1em;
+            }
+
+            .console-box {
+                height: 150px;
+            }
+
+            input, textarea {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            input, textarea {
+                font-size: 0.9em;
+            }
+
+            button {
+                font-size: 1em;
+            }
+
+            .console-box {
+                height: 130px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Encryption Portal</h1>
+
+        <!-- Encrypt Section -->
+        <div>
+            <h2>Encrypt</h2>
+            <label for="encryptMessage">Enter your message:</label>
+            <input type="text" id="encryptMessage" placeholder="Enter your secret message">
+            <button onclick="encryptMessage()">Encrypt</button>
+            <div class="console-box" id="encryptConsole"></div>
+            <label><strong>Encrypted Message:</strong></label>
+            <textarea id="encryptedOutput" rows="3" readonly></textarea>
+        </div>
+
+        <!-- Decrypt Section -->
+        <div>
+            <h2>Decrypt</h2>
+            <label for="decryptMessage">Enter encrypted message:</label>
+            <textarea id="decryptMessage" placeholder="Paste encrypted message here" rows="3"></textarea>
+            <button onclick="decryptMessage()">Decrypt</button>
+            <div class="console-box" id="decryptConsole"></div>
+            <label><strong>Decrypted Message:</strong></label>
+            <textarea id="decryptedOutput" rows="3" readonly></textarea>
+        </div>
+    </div>
+
+    <script>
+        const password = "YourSecretPassword";  // Hardcoded password for encryption/decryption
+
+        // Function to show randomized console output during encryption/decryption
+        function showConsoleOutput(consoleId, messages) {
+            const consoleBox = document.getElementById(consoleId);
+            let currentMessage = 0;
+            consoleBox.innerHTML = '';  // Clear previous output
+
+            // Randomize message order and show rapidly
+            const randomizedMessages = shuffleArray(messages);
+            const interval = setInterval(() => {
+                if (currentMessage < randomizedMessages.length) {
+                    consoleBox.innerHTML += randomizedMessages[currentMessage] + '\n';
+                    consoleBox.scrollTop = consoleBox.scrollHeight;  // Scroll to the bottom
+                    currentMessage++;
+                } else {
+                    clearInterval(interval);  // Stop after all messages are shown
+                }
+            }, 50);  // Faster message display
+        }
+
+        // Shuffle array (randomize message order)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+            }
+            return array;
+        }
+
+        // Encrypt message
+        function encryptMessage() {
+            const message = document.getElementById('encryptMessage').value;
+            const encryptedOutput = document.getElementById('encryptedOutput');
+
+            if (message) {
+                const encryptMessages = [
+    "Initializing encryption protocol...",
+    "Verifying encryption key integrity...",
+    "Loading AES encryption module...",
+    "Generating random initialization vector...",
+    "Hashing password with SHA-256...",
+    "Encrypting password data block 1...",
+    "Applying PBKDF2 for password hashing...",
+    "Verifying user credentials...",
+    "Checking encryption library dependencies...",
+    "Encrypting password with symmetric key...",
+    "Splitting password into encrypted chunks...",
+    "Securing password using salt generation...",
+    "Applying encryption padding for data integrity...",
+    "Running encryption algorithm on password...",
+    "Encrypting data stream with AES-256...",
+    "Shuffling encryption keys for added security...",
+    "Encrypting password using CBC mode...",
+    "Converting plaintext password to ciphertext...",
+    "Validating encryption parameters...",
+    "Encrypting password with secret key...",
+    "Applying HMAC for password verification...",
+    "Splitting password into smaller blocks...",
+    "Combining password hash with salt...",
+    "Generating random salt for encryption...",
+    "Validating encryption session integrity...",
+    "Encrypting the password using 256-bit key...",
+    "Converting password to secure format...",
+    "Initializing padding for encryption...",
+    "Finalizing encryption algorithm...",
+    "Encrypting password block 1 of 5...",
+    "Validating checksum for encrypted data...",
+    "Initializing secure encryption context...",
+    "Transforming password to encrypted form...",
+    "Decrypting intermediate data for key verification...",
+    "Applying entropy to encryption process...",
+    "Running multiple rounds of key stretching...",
+    "Encrypting password using asymmetric encryption...",
+    "Applying advanced encryption techniques...",
+    "Performing AES encryption with 128-bit key...",
+    "Verifying data integrity during encryption...",
+    "Generating secure key pair for encryption...",
+    "Encrypting password using hybrid encryption...",
+    "Checking for key duplication in encryption...",
+    "Verifying cryptographic key length for strength...",
+    "Finalizing password encryption...",
+    "Verifying password authenticity...",
+    "Generating unique encryption identifier...",
+    "Completing encryption process for password...",
+    "Applying final encryption verification step...",
+    "Password encryption complete. Secure key stored.",
+    "Initializing encryption algorithm...",
+    "Verifying encryption parameters...",
+    "Loading AES encryption module...",
+    "Generating random encryption key...",
+    "Applying hash function for encryption...",
+    "Encrypting data block 1...",
+    "Splitting data into encrypted chunks...",
+    "Verifying integrity of encryption input...",
+    "Encrypting data using secret passphrase...",
+    "Securing encryption process with key derivation...",
+    "Encrypting data using public key...",
+    "Shuffling data for secure encryption...",
+    "Applying salting for additional security...",
+    "Encrypting payload with AES-128...",
+    "Preparing final encryption output...",
+    "Verifying encryption session...",
+    "Encrypting data with symmetric algorithm...",
+    "Securing data with multiple encryption layers...",
+    "Combining key material with encryption vector...",
+    "Running pre-encryption checks...",
+    "Applying padding to the data...",
+    "Encrypting using RSA with 2048-bit key...",
+    "Encrypting chunk 1 of 3...",
+    "Randomizing encryption process...",
+    "Creating encryption signature...",
+    "Encrypting metadata for security...",
+    "Generating random IV (Initialization Vector)...",
+    "Testing encryption with temporary keys...",
+    "Applying AES encryption in ECB mode...",
+    "Transforming plaintext into ciphertext...",
+    "Encrypting data with advanced security protocols...",
+    "Shuffling encryption steps for improved security...",
+    "Verifying encryption algorithm compatibility...",
+    "Encrypting data stream with AES-256...",
+    "Applying dynamic encryption keys...",
+    "Running multiple encryption rounds...",
+    "Initializing hybrid encryption scheme...",
+    "Encrypting sensitive data chunks...",
+    "Encrypting using elliptic curve encryption...",
+    "Verifying encryption hash consistency...",
+    "Applying asymmetric encryption methods...",
+    "Encrypting password data using key exchange...",
+    "Generating session-specific encryption keys...",
+    "Preparing for final encryption verification...",
+    "Encrypting backup data for security...",
+    "Encrypting system configuration settings...",
+    "Finalizing encrypted output..."
+];
+
+                showConsoleOutput('encryptConsole', encryptMessages);
+
+                setTimeout(() => {
+                    const encrypted = CryptoJS.AES.encrypt(message, password).toString();
+                    encryptedOutput.value = encrypted;
+                }, encryptMessages.length * 50);  // Adjust for faster encryption
+            } else {
+                alert('Please enter a message to encrypt.');
+            }
+        }
+
+        // Decrypt message
+        function decryptMessage() {
+            const encryptedMessage = document.getElementById('decryptMessage').value;
+            const decryptedOutput = document.getElementById('decryptedOutput');
+
+            if (encryptedMessage) {
+                const decryptMessages = [
+    "Initializing decryption protocol...",
+    "Verifying decryption key integrity...",
+    "Loading AES decryption module...",
+    "Generating random decryption initialization vector...",
+    "Hashing password for decryption check...",
+    "Decrypting password data block 1...",
+    "Applying PBKDF2 for password verification...",
+    "Verifying decryption credentials...",
+    "Checking decryption library dependencies...",
+    "Decrypting password with symmetric key...",
+    "Splitting encrypted data into blocks...",
+    "Applying salt verification for decryption...",
+    "Decrypting data stream with AES-256...",
+    "Shuffling decryption keys for added security...",
+    "Decrypting password using CBC mode...",
+    "Converting ciphertext back to plaintext...",
+    "Validating decryption parameters...",
+    "Decrypting password with secret key...",
+    "Applying HMAC for password recovery...",
+    "Splitting encrypted password into smaller blocks...",
+    "Combining password hash with salt for decryption...",
+    "Validating decryption session integrity...",
+    "Decrypting password using 256-bit key...",
+    "Converting encrypted password to readable format...",
+    "Initializing padding for decryption...",
+    "Finalizing decryption process...",
+    "Decrypting password block 1 of 5...",
+    "Validating checksum for decrypted data...",
+    "Initializing secure decryption context...",
+    "Transforming ciphertext to original password...",
+    "Decrypting intermediate data for key validation...",
+    "Applying entropy to decryption process...",
+    "Running multiple rounds of key stretching...",
+    "Decrypting password using asymmetric encryption...",
+    "Applying advanced decryption techniques...",
+    "Performing AES decryption with 128-bit key...",
+    "Verifying data integrity during decryption...",
+    "Generating secure key pair for decryption...",
+    "Decrypting password using hybrid decryption...",
+    "Checking for key duplication in decryption...",
+    "Verifying cryptographic key length for strength...",
+    "Finalizing password decryption...",
+    "Verifying password authenticity...",
+    "Generating unique decryption identifier...",
+    "Completing decryption process for password...",
+    "Applying final decryption verification step...",
+    "Password decryption complete. Secure key verified.",
+    "Initializing decryption sequence...",
+    "Verifying decryption key validity...",
+    "Loading AES decryption module...",
+    "Generating decryption initialization vector...",
+    "Validating decryption credentials...",
+    "Decrypting first data block...",
+    "Splitting encrypted data for decryption...",
+    "Verifying encryption integrity for decryption...",
+    "Decrypting data using asymmetric key...",
+    "Decrypting data with secret decryption passphrase...",
+    "Applying key expansion during decryption...",
+    "Decrypting data using public key...",
+    "Reconstructing original plaintext from ciphertext...",
+    "Decrypting chunk 1 of 3...",
+    "Validating decrypted data integrity...",
+    "Decrypting data with AES-256 algorithm...",
+    "Verifying decrypted data consistency...",
+    "Decrypting payload using hybrid method...",
+    "Decrypting sensitive data block...",
+    "Converting ciphertext back to readable data...",
+    "Verifying the decryption key pair...",
+    "Applying padding correction to decrypted data...",
+    "Decrypting using AES in CBC mode...",
+    "Decrypting secure backup data...",
+    "Checking decryption protocol integrity...",
+    "Decrypting metadata and restoring original data...",
+    "Decrypting file contents...",
+    "Decrypting chunk 2 of 5...",
+    "Running integrity checks during decryption...",
+    "Decryption in progress...",
+    "Decrypting password with 256-bit key...",
+    "Decrypting data using RSA private key...",
+    "Decrypting encrypted blocks in parallel...",
+    "Decrypting data stream using multiple keys...",
+    "Verifying decryption key pair consistency...",
+    "Decrypting system configuration data...",
+    "Validating decrypted password...",
+    "Decrypting AES encrypted message...",
+    "Restoring original data from encrypted format...",
+    "Verifying authenticity of decrypted data...",
+    "Decrypting chunk 3 of 5...",
+    "Finalizing decrypted data verification...",
+    "Decryption complete. Password successfully recovered.",
+    "Decryption key authentication in progress...",
+    "Restoring user credentials after decryption...",
+    "Decrypting file checksum for validation...",
+    "Decrypting encrypted user data...",
+    "Decrypting final data block..."
+];
+
+                showConsoleOutput('decryptConsole', decryptMessages);
+
+                setTimeout(() => {
+                    try {
+                        const decrypted = CryptoJS.AES.decrypt(encryptedMessage, password);
+                        const originalMessage = decrypted.toString(CryptoJS.enc.Utf8);
+                        decryptedOutput.value = originalMessage || 'Incorrect password or corrupted data.';
+                    } catch (error) {
+                        decryptedOutput.value = 'Decryption failed.';
+                    }
+                }, decryptMessages.length * 50);  // Adjust for faster decryption
+            } else {
+                alert('Please enter the encrypted message to decrypt.');
+            }
+        }
+    </script>
+</body>
+</html>
